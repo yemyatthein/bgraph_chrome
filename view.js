@@ -28,13 +28,24 @@ ymt.main = {
                 var e = objref.edge_data[params.nodes[0]];
 
                 if (p !== undefined && e !== undefined) {
+                    var incoming       = document.getElementById("main_url_incoming");
+                    var outgoing       = document.getElementById("main_url_outgoing");
+                    incoming.innerHTML = "";
+                    outgoing.innerHTML = "";
+                    
+                    e.incoming.forEach(function(url) {
+                        if (url !== "chrome://newtab/") {
+                            var b = document.createElement("li");
+                            b.innerHTML = "<a href=\"#\">" + url + "</a>";
+                            incoming.appendChild(b);
+                        }
+                    });
 
-                    //var outgoing = document.getElementById("main_url_outgoing");
-                    //e.outgoing.forEach(function(url) {
-                        //var b = document.createElement("li");
-                        //b.innerHTML = "<a href=\"#\">" + url + "</a>";
-                        //outgoing.appendChild(b);
-                    //});
+                    e.outgoing.forEach(function(url) {
+                        var b = document.createElement("li");
+                        b.innerHTML = "<a href=\"#\">" + url + "</a>";
+                        outgoing.appendChild(b);
+                    });
 
                     document.getElementById("main_url_title").innerHTML = "<a href=\"#\">" + p.page_title + "</a>";
                     document.getElementById("main_url_description").innerHTML = p.description;
