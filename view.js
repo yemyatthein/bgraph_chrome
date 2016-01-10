@@ -2,7 +2,9 @@ var ymt = ymt || {};
 
 ymt.main = {
     edge_data: {
+    },
 
+    page_info: {
     },
 
     renderGraph: function (nodes, edges) {
@@ -19,9 +21,14 @@ ymt.main = {
         
         var network = new vis.Network(container, data, options);
 
+        var objref = this;
         network.on("click", function (params) {
-            params.event = "[original event]";
-            console.log("Clicked =>", params);
+            console.log("Clicked => ", params);
+            var p = objref.page_info[params.nodes[0]];
+            var e = objref.edge_data[params.nodes[0]];
+            console.log("Clicked => ", p, e);
+
+            document.getElementById("main_url_description").innerHTML = p.description;
         });
     },
 }
@@ -39,6 +46,8 @@ window.addEventListener('DOMContentLoaded', function(evt) {
         var page_info   = eventPage.bgraph.bg_page.data.page_info;
         var stack_info  = eventPage.bgraph.bg_page.data.stack;
         var origin_info = eventPage.bgraph.bg_page.data.origin;
+
+        ymt.main.page_info = page_info;
 
         var node_type = "image";
         var icon_url  = "http://zura.vn/images/user.png";
