@@ -1,0 +1,32 @@
+{
+    "manifest_version": 2,
+    "name": "Browsing Graph",
+    "description": "Graph to show your browsing graph",
+    "version": "0.0.1",
+
+    "background": {
+        "scripts": ["localforage.min.js", "event.js"],
+        "persistent": false
+    },
+
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
+    },
+
+    "permissions": [
+        "webNavigation",
+        "history",
+        "tabs", 
+        "http://*/*", 
+        "https://*/*"
+    ],
+
+    "content_scripts": [
+        {
+            "matches": ["http://*/*", "https://*/*"],
+            "js": ["content.js"],
+            "run_at": "document_end"
+        }
+    ]
+}
