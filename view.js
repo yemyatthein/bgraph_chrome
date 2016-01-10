@@ -23,12 +23,24 @@ ymt.main = {
 
         var objref = this;
         network.on("click", function (params) {
-            console.log("Clicked => ", params);
-            var p = objref.page_info[params.nodes[0]];
-            var e = objref.edge_data[params.nodes[0]];
-            console.log("Clicked => ", p, e);
+            if (params.nodes.length > 0) {
+                var p = objref.page_info[params.nodes[0]];
+                var e = objref.edge_data[params.nodes[0]];
 
-            document.getElementById("main_url_description").innerHTML = p.description;
+                if (p !== undefined && e !== undefined) {
+
+                    //var outgoing = document.getElementById("main_url_outgoing");
+                    //e.outgoing.forEach(function(url) {
+                        //var b = document.createElement("li");
+                        //b.innerHTML = "<a href=\"#\">" + url + "</a>";
+                        //outgoing.appendChild(b);
+                    //});
+
+                    document.getElementById("main_url_title").innerHTML = "<a href=\"#\">" + p.page_title + "</a>";
+                    document.getElementById("main_url_description").innerHTML = p.description;
+                }
+            }
+            
         });
     },
 }
