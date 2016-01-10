@@ -5,12 +5,12 @@ ymt.main = {
 
     },
 
-    new_tab: function() {
-        chrome.tabs.create(
-            {url: chrome.extension.getURL("view.html")})
-    },
-
     renderGraph: function (nodes, edges) {
+
+        nodes = new vis.DataSet(nodes);
+        edges = new vis.DataSet(edges);
+
+        console.log(nodes);
         
         var container = document.getElementById('mynetwork');
         
@@ -28,9 +28,6 @@ ymt.main = {
 
 
 window.addEventListener('DOMContentLoaded', function(evt) {
-
-    document.getElementById("new_tab")
-        .addEventListener("click", ymt.main.new_tab);
 
     var nodes = [];
     var edges = [];
@@ -72,7 +69,8 @@ window.addEventListener('DOMContentLoaded', function(evt) {
                             id     : node_name, 
                             label  : node_name.slice(0, 25), 
                             shape  : node_type,
-                            image  : icon_url
+                            image  : icon_url,
+                            title  : node_name
                         };
                     } else {
                         if (page.page_title === "") {
@@ -80,14 +78,16 @@ window.addEventListener('DOMContentLoaded', function(evt) {
                                 id      : page.page_url, 
                                 label   : page.page_url.slice(0, 25), 
                                 shape   : node_type,
-                                image   : icon_url
+                                image   : icon_url,
+                                title   : page.page_url
                             };
                         } else {
                             var node = {
                                 id      : page.page_url, 
                                 label   : page.page_title.slice(0, 25), 
                                 shape   : node_type,
-                                image   : icon_url
+                                image   : icon_url,
+                                title   : page.page_title
                             };
                         }
                     }
