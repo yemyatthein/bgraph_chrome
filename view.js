@@ -36,19 +36,20 @@ ymt.main = {
                     e.incoming.forEach(function(url) {
                         if (url !== "chrome://newtab/") {
                             var b = document.createElement("li");
-                            b.innerHTML = "<a href=\"#\">" + url + "</a>";
+                            b.innerHTML = "<a href=\"#\">" + objref.page_info[url].page_title || url + "</a>";
                             incoming.appendChild(b);
                         }
                     });
 
                     e.outgoing.forEach(function(url) {
                         var b = document.createElement("li");
-                        b.innerHTML = "<a href=\"#\">" + url + "</a>";
+                        b.innerHTML = "<a href=\"#\">" + objref.page_info[url].page_title || url + "</a>";
                         outgoing.appendChild(b);
                     });
-
+                    
                     document.getElementById("main_url_title").innerHTML = "<a href=\"#\">" + p.page_title + "</a>";
                     document.getElementById("main_url_description").innerHTML = p.description;
+                    document.getElementById("main_url_image").setAttribute("src", p.image);
                 }
             }
             
@@ -63,6 +64,7 @@ window.addEventListener('DOMContentLoaded', function(evt) {
     var edges = [];
 
     var nodes_hash = {};
+    var edges_hash = {};
     
     chrome.runtime.getBackgroundPage(function(eventPage) {
         var edge_info   = eventPage.bgraph.bg_page.data.edge;
@@ -73,7 +75,8 @@ window.addEventListener('DOMContentLoaded', function(evt) {
         ymt.main.page_info = page_info;
 
         var node_type = "image";
-        var icon_url  = "http://zura.vn/images/user.png";
+        //var icon_url  = "http://zura.vn/images/user.png";
+        var icon_url  = "http://flyosity.com/images/_blogentries/networkicon/stepfinal2.png";
 
         Object.keys(edge_info).forEach(function(k){
             var obj = edge_info[k];
@@ -142,7 +145,10 @@ window.addEventListener('DOMContentLoaded', function(evt) {
                 current_target.incoming.push(source);
                 ymt.main.edge_data[target] = current_target;
 
-                edges.push({"from": source, "to": target, "arrows": "to"});
+                if (edges_hash[source + target] === undefined) {
+                    edges.push({"from": source, "to": target, "arrows": "to"});
+                    edges_hash[source + target] = edges[edges.length - 1];
+                }
             }
         });
 
