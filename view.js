@@ -46,7 +46,7 @@ ymt.main = {
                         b.innerHTML = "<a href=\"#\">" + objref.page_info[url].page_title || url + "</a>";
                         outgoing.appendChild(b);
                     });
-                    
+
                     document.getElementById("main_url_title").innerHTML = "<a href=\"#\">" + p.page_title + "</a>";
                     document.getElementById("main_url_description").innerHTML = p.description;
                     document.getElementById("main_url_image").setAttribute("src", p.image);
@@ -153,6 +153,7 @@ window.addEventListener('DOMContentLoaded', function(evt) {
         });
 
         console.log(ymt.main.edge_data);
+        console.log(nodes_hash);
 
         ymt.main.renderGraph(nodes, edges);
     });

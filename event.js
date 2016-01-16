@@ -36,21 +36,26 @@ bgraph.bg_page = {
     }
 };
 
+// When a tab is created
 chrome.tabs.onCreated.addListener(function(tab) {
     var objref = bgraph.bg_page;
     bgraph.bg_page.saveTabStack(tab);
 
+    // Save current active tab quickly, as an origin of the created tab,
+    // It may be the same tab
     chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
         objref.data.origin[objref._NS.TAB_ORIGIN + tab.id] = tabs[0];
     });
 });
 
+// When content script sends a message after page load
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)  { 
     var objref = bgraph.bg_page;
     
     objref.saveTabStack(sender.tab);
     objref.data.page_info[sender.tab.url] = message;
 
+    // When the tab has origin, save edge between links of the two
     var tab_origin = objref.data.origin[objref._NS.TAB_ORIGIN + sender.tab.id];
     if (tab_origin !== undefined && tab_origin.id !== sender.tab.id) {
         var source          = tab_origin.url;
@@ -63,9 +68,12 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)  {
     }
 });
 
+// When a tab is replaced internally
 chrome.tabs.onReplaced.addListener(function(new_tab_id, old_tab_id) {
     var objref = bgraph.bg_page;
 
+    // If tab is a replaced one, put an indicator for later retrieval,
+    // Add an edge between the indicator and first link in the tab stack
     var tab_stack = [];
     if (objref.data.stack[objref._NS.TAB_STACK + new_tab_id] !== undefined) {
         tab_stack = objref.data.stack[objref._NS.TAB_STACK + new_tab_id];

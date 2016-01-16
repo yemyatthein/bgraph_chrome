@@ -1,0 +1,64 @@
+.container {
+    width: 100%;
+    padding-top: 10px;
+}
+
+.left_holder {
+    width: 100%;
+}
+
+div.bscol_veritcal_navbar {
+    padding-right: 0px;
+}
+div.bscol_main_content_holder {
+    padding-left: 0px;
+}
+div.bscol_url_summary_holder {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+img.url_summary_img {
+    width: 150px;
+    height: 212px;
+}
+
+table.url_summary_table {
+    width: 100%;
+}
+
+table.url_summary_table td {
+    vertical-align: top;
+}
+
+td.url_summary_text_td {
+    padding-left: 5px;
+}
+
+div.url_summary_text_content {
+    padding-top:10px;
+}
+
+ul.vertical_navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+}
+
+ul.vertical_navbar li a {
+    display: block;
+    color: #000;
+    padding: 8px 0 8px 16px;
+    text-decoration: none;
+}
+
+ul.vertical_navbar li a.active, ul.vertical_navbar li a.active:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+ul.vertical_navbar li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
