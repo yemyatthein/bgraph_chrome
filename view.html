@@ -2,11 +2,15 @@
 <html>
 
 <head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+
+	<link rel="stylesheet" href="styles/base.css" />
+
 	<style type="text/css">
 		div#mynetwork {
-			width: 730px;
-			height: 480px;
-			background: aliceblue;
+			//width: 730px;
+			height: 450px;
+			background: #EFF5FB;
 			border: 1px solid #ccc;
 		}
 		div#linkinfo_container {
@@ -27,67 +31,123 @@
 </head>
 
 <body>
-	<div style="display:table; width:100%;">
-		<div style="display:table-row; height:100%;">
-			<div style="display:table-cell; width:60%; height:100%;">
-				<div id="mynetwork"></div>
-			</div>
-			<div style="display:table-cell; width:40%; height:100%; vertical-align:top">
-				<div id="linkinfo_container">
-					
-					<table border="0" style="width:100%;">
-						<tr>
-							<td style="vertical-align:top; width:152px;">
-								<img src="http://p2cdn4static.sharpschool.com/UserFiles/Servers/Server_3145767/Image/Computer-Network-Technology.jpg" id="main_url_image" width="150px">
-							</td>
-							<td style="vertical-align:top; padding-left:5px;">
-								<div><b>
-									<span id="main_url_title">
-										<a href="#">The secret subway of Crystal Palace 'set to re-open' - BBC News</a>
-									</span>
-								</b></div>
-								<div id="main_url_description" style="margin-top:10px;">
-									The best of the BBC, with the latest news and sport headlines, weather, TV & radio highlights and much more from across the whole of BBC Online.
-								</div>
-							</td>
-						</tr>
-					</table>
 
-					<div style="display:table; width:100%; margin-top:30px; border-top:1px solid #ccc; padding-top:5px;">
-						<div style="display:table-row; height:100%;">
-							<div style="display:table-cell; width:50%;">
-								<div style="margin:5px; padding:3px; word-wrap:break-word; width:220px;">
-									<div>
-										<b>Incoming links</b>
-										<ul id="main_url_incoming">
-											<li><a href="#">The secret subway of Crystal Palace 'set to re-open' - BBC News</a></li>
-											<li><a href="#">The secret subway of Crystal Palace 'set to re-open' - BBC News</a></li>
-											<li><a href="#">The secret subway of Crystal Palace 'set to re-open' - BBC News</a></li>
-										</ul>
-									</div>
-								</div>
+	<div class="container">
+	    <div class="row">
+	        <div class="bscol_veritcal_navbar col-md-2">
+	            <ul class="vertical_navbar nav nav-pills nav-stacked">
+	               <li><a class="active" href="">Browsing Graph</a></li>
+	               <li><a href="">Resource List</a></li>
+	               <li><a href="">Save Concept</a></li>
+	            </ul>
+	        </div>
+	        <div class="bscol_main_content_holder col-md-10">
+	            <div class="col-md-8">
+	                <div id="mynetwork" class="left_holder"></div>
+	            </div>
+	            <div class="bscol_url_summary_holder col-md-4">
+	                
+	                <div style="background:#EFF5FB; padding:5px; min-height:222px; border:1px solid #ccc;">
+		                <table class="url_summary_table" border="0">
+		                    <tr>
+		                        <td>
+		                            <div class="url_summary_img">
+	                            		<img src="http://hdwallpaperslovely.com/wp-content/gallery/ziggy-cartoon-pictures/Ziggy-Stardust-ziggy-stardust-9109824-842-1191.jpg" id="main_url_image" />
+	                            	</div>
+		                        </td>
+		                        <td class="url_summary_text_td">
+		                            <div><b>
+		                                <span id="main_url_title">
+		                                    <a href="#">The secret subway of Crystal Palace 'set to re-open' - BBC News</a>
+		                                </span>
+		                            </b></div>
+		                            <div id="main_url_description" class="url_summary_text_content">
+		                                The best of the BBC, with the latest news and sport headlines, weather, TV and radio highlights and much more from across the whole of BBC Online.
+		                            </div>
+		                        </td>
+		                    </tr>
+		                </table>
+	                </div>
 
-							</div>
-							<div style="display:table-cell; width:50%; vertical-align:top;">
-								<div style="margin:5px; padding:3px; word-wrap:break-word; width:220px;">
-									<div>
-										<b>Outgoing links</b>
-										<ul id="main_url_outgoing">
-											<li><a href="#">The secret subway of Crystal Palace 'set to re-open' - BBC News</a></li>
-											<li><a href="#">The secret subway of Crystal Palace 'set to re-open' - BBC News</a></li>
-											<li><a href="#">The secret subway of Crystal Palace 'set to re-open' - BBC News</a></li>
-											<li><a href="#">The secret subway of Crystal Palace 'set to re-open' - BBC News</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+	                <hr/>
 
-				</div>
-			</div>
-		</div>
+	                <div id="main_url_incoming_title"><b>Incoming links</b></div>
+
+	                <div id="main_url_incoming">
+		                <div class="container rel_link_container">
+		                    <div class="row">
+		                        <div class="col-md-1" style="padding-left:5px; padding-right:0px; padding-top:3px;">
+		                            <img src="https://s.ytimg.com/yts/img/favicon-vflz7uhzw.ico" />
+		                        </div>
+		                        <div class="col-md-11" style="padding-left:0px; padding-right:0px;">
+		                            <a href="#">The secret subway of Crystal Palace set to reopen</a>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="container rel_link_container">
+		                    <div class="row">
+		                        <div class="col-md-1" style="padding-left:5px; padding-right:0px; padding-top:3px;">
+		                            <img src="https://s.ytimg.com/yts/img/favicon-vflz7uhzw.ico" />
+		                        </div>
+		                        <div class="col-md-11" style="padding-left:0px; padding-right:0px;">
+		                            <a href="#">The secret subway of Crystal Palace set to reopen</a>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="container rel_link_container">
+		                    <div class="row">
+		                        <div class="col-md-1" style="padding-left:5px; padding-right:0px; padding-top:3px;">
+		                            <img src="https://s.ytimg.com/yts/img/favicon-vflz7uhzw.ico" />
+		                        </div>
+		                        <div class="col-md-11" style="padding-left:0px; padding-right:0px;">
+		                            <a href="#">The secret subway of Crystal Palace set to reopen</a>
+		                        </div>
+		                    </div>
+		                </div>
+	                </div>
+
+	                <hr id="main_url_incoming_hr"/>
+
+	                <div id="main_url_outgoing_title"><b>Outgoing links</b></div>
+
+	                <div id="main_url_outgoing">
+		                <div class="container rel_link_container">
+		                    <div class="row">
+		                        <div class="col-md-1" style="padding-left:5px; padding-right:0px; padding-top:3px;">
+		                            <img src="https://s.ytimg.com/yts/img/favicon-vflz7uhzw.ico" />
+		                        </div>
+		                        <div class="col-md-11" style="padding-left:0px; padding-right:0px;">
+		                            <a href="#">The secret subway of Crystal Palace set to reopen</a>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="container rel_link_container">
+		                    <div class="row">
+		                        <div class="col-md-1" style="padding-left:5px; padding-right:0px; padding-top:3px;">
+		                            <img src="https://s.ytimg.com/yts/img/favicon-vflz7uhzw.ico" />
+		                        </div>
+		                        <div class="col-md-11" style="padding-left:0px; padding-right:0px;">
+		                            <a href="#">The secret subway of Crystal Palace set to reopen</a>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="container rel_link_container">
+		                    <div class="row">
+		                        <div class="col-md-1" style="padding-left:5px; padding-right:0px; padding-top:3px;">
+		                            <img src="https://s.ytimg.com/yts/img/favicon-vflz7uhzw.ico" />
+		                        </div>
+		                        <div class="col-md-11" style="padding-left:0px; padding-right:0px;">
+		                            <a href="#">The secret subway of Crystal Palace set to reopen</a>
+		                        </div>
+		                    </div>
+		                </div>
+	                </div>
+
+	            </div>
+	        </div>
+	    </div>
 	</div>
+
 </body>
 
 </html>

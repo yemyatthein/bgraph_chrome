@@ -36,52 +36,22 @@ ymt.view = {
                 if (p !== undefined && e !== undefined) {
                     var incoming       = document.getElementById("main_url_incoming");
                     var outgoing       = document.getElementById("main_url_outgoing");
-
-                    var title = document.getElementById("main_url_incoming_title");
-                    title.style.display = null;
-
-                    var hr = document.getElementById("main_url_incoming_hr");
-                    hr.style.display = null;
-                    
                     incoming.innerHTML = "";
                     outgoing.innerHTML = "";
                     
                     e.incoming.forEach(function(url) {
                         if (url !== ymt.view.constants.CHROME_NEWTAB) {
-                            var div  = document.createElement("div");
-                            var attr = document.createAttribute("class");
-                            attr.value = "container rel_link_container";
-                            div.setAttributeNode(attr);
-                            
-                            div.innerHTML = "<div class=\"row\"><div class=\"col-md-1\" style=\"padding-left:5px; padding-right:0px; padding-top:0px;\"><img src=\"https://s.ytimg.com/yts/img/favicon-vflz7uhzw.ico\" /></div><div class=\"col-md-11\" style=\"padding-left:0px; padding-right:0px;\"><a href=\"#\">" + (objref.page_info[url].page_title || url) + "</a></div></div>";
-                            
-                            incoming.appendChild(div);
+                            var b = document.createElement("li");
+                            b.innerHTML = "<a href=\"#\">" + objref.page_info[url].page_title || url + "</a>";
+                            incoming.appendChild(b);
                         }
                     });
 
                     e.outgoing.forEach(function(url) {
-                        var div  = document.createElement("div");
-                        var attr = document.createAttribute("class");
-                        attr.value = "container rel_link_container";
-                        div.setAttributeNode(attr);
-                        
-                        div.innerHTML = "<div class=\"row\"><div class=\"col-md-1\" style=\"padding-left:5px; padding-right:0px; padding-top:0px;\"><img src=\"https://s.ytimg.com/yts/img/favicon-vflz7uhzw.ico\" /></div><div class=\"col-md-11\" style=\"padding-left:0px; padding-right:0px;\"><a href=\"#\">" + (objref.page_info[url].page_title || url) + "</a></div></div>";
-                        
-                        outgoing.appendChild(div);
+                        var b = document.createElement("li");
+                        b.innerHTML = "<a href=\"#\">" + objref.page_info[url].page_title || url + "</a>";
+                        outgoing.appendChild(b);
                     });
-
-                    if ((e.incoming.length == 0) || (e.incoming.length == 1 && e.incoming[0] === ymt.view.constants.CHROME_NEWTAB)) {
-                        var title = document.getElementById("main_url_incoming_title");
-                        title.style.display = "none";
-
-                        var hr = document.getElementById("main_url_incoming_hr");
-                        hr.style.display = "none";
-                    }
-
-                    if (e.outgoing.length == 0) {
-                        var title = document.getElementById("main_url_outgoing_title");
-                        title.style.display = "none";
-                    }
 
                     document.getElementById("main_url_title").innerHTML = "<a href=\"#\">" + p.page_title + "</a>";
                     document.getElementById("main_url_description").innerHTML = p.description;
@@ -107,7 +77,7 @@ window.addEventListener('DOMContentLoaded', function(evt) {
         // Constants for node types in vis js
         var NODE_TYPE = "image";
         var ICON_URL  = "http://flyosity.com/images/_blogentries/networkicon/stepfinal2.png";
-        var MAX_CHAR  = 20;
+        var MAX_CHAR  = 25;
 
         // Get data sources from background page
         var ds_edge         = eventPage.bgraph.bg_page.data.edge;

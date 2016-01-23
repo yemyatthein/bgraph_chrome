@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style type="text/css">
+		div#mynetwork {
+			width: 730px;
+			height: 480px;
+			background: aliceblue;
+			border: 1px solid #ccc;
+		}
+		div#linkinfo_container {
+			width: 450px;
+			height: 500px;
+			background: #fff;
+			padding-top: 20px;
+			font-family: Helvetica, Arial, Sans-Serif;
+			font-size: 15px;
+		}
+	</style>
+
+	<link href="vis.css" rel="stylesheet" type="text/css"/>
+
+	<script type="text/javascript" src="localforage.min.js"></script>
+	<script type="text/javascript" src="vis.js"></script>
+	<script type="text/javascript" src="view.js"></script>
+</head>
+
+<body>
+	<div style="display:table; width:100%;">
+		<div style="display:table-row; height:100%;">
+			<div style="display:table-cell; width:60%; height:100%;">
+				<div id="mynetwork"></div>
+			</div>
+			<div style="display:table-cell; width:40%; height:100%; vertical-align:top">
+				<div id="linkinfo_container">
+					
+					<table border="0" style="width:100%;">
+						<tr>
+							<td style="vertical-align:top; width:152px;">
+								<img src="http://blog-assets.bigfishgames.com/uploads/2012/10/91.jpg" id="main_url_image" width="150px">
+							</td>
+							<td style="vertical-align:top; padding-left:5px;">
+								<div><b>
+									<span id="main_url_title">
+										<a href="#">The secret subway of Crystal Palace 'set to re-open' - BBC News</a>
+									</span>
+								</b></div>
+								<div id="main_url_description" style="margin-top:10px;">
+									The best of the BBC, with the latest news and sport headlines, weather, TV & radio highlights and much more from across the whole of BBC Online.
+								</div>
+							</td>
+						</tr>
+					</table>
+
+					<div style="display:table; width:100%; margin-top:30px; border-top:1px solid #ccc; padding-top:5px;">
+						<div style="display:table-row; height:100%;">
+							<div style="display:table-cell; width:50%;">
+								<div style="margin:5px; padding:3px; word-wrap:break-word; width:220px;">
+									<div>
+										<b>Incoming links</b>
+										<ul id="main_url_incoming">
+											<li><a href="#">The secret subway of Crystal Palace 'set to re-open' - BBC News</a></li>
+											<li><a href="#">The secret subway of Crystal Palace 'set to re-open' - BBC News</a></li>
+											<li><a href="#">The secret subway of Crystal Palace 'set to re-open' - BBC News</a></li>
+										</ul>
+									</div>
+								</div>
+
+							</div>
+							<div style="display:table-cell; width:50%; vertical-align:top;">
+								<div style="margin:5px; padding:3px; word-wrap:break-word; width:220px;">
+									<div>
+										<b>Outgoing links</b>
+										<ul id="main_url_outgoing">
+											<li><a href="#">The secret subway of Crystal Palace 'set to re-open' - BBC News</a></li>
+											<li><a href="#">The secret subway of Crystal Palace 'set to re-open' - BBC News</a></li>
+											<li><a href="#">The secret subway of Crystal Palace 'set to re-open' - BBC News</a></li>
+											<li><a href="#">The secret subway of Crystal Palace 'set to re-open' - BBC News</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
