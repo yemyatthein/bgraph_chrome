@@ -18,6 +18,14 @@ div.bscol_url_summary_holder {
     padding-right: 0px;
 }
 
+div.rel_link_container {
+    padding-top: 0px;
+}
+
+div.links_title_holder {
+    padding-bottom: 5px;
+}
+
 img.url_summary_img {
     width: 150px;
     height: 212px;
