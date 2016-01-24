@@ -22,7 +22,7 @@ if (desc_meta.length > 0) {
 
 // Image
 
-var default_image = "http://p2cdn4static.sharpschool.com/UserFiles/Servers/Server_3145767/Image/Computer-Network-Technology.jpg";
+var default_image = "http://www.tampabay.com/resources/images/dti/rendered/2015/09/tbw_meditationb092515_15944893_8col.jpg";
 
 var image = document.getElementsByTagName("meta");
 var image = Object.keys(image).map(function(k) { 

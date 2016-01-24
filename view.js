@@ -36,12 +36,18 @@ ymt.view = {
                 if (p !== undefined && e !== undefined) {
                     var incoming       = document.getElementById("main_url_incoming");
                     var outgoing       = document.getElementById("main_url_outgoing");
+                    
+                    var summary_container = document.getElementById("url_summary_table");
+                    summary_container.style.display = null;
 
-                    var title = document.getElementById("main_url_incoming_title");
-                    title.style.display = null;
+                    var no_summary_container = document.getElementById("no_summary_info_container");
+                    no_summary_container.style.display = "none";
 
-                    var hr = document.getElementById("main_url_incoming_hr");
-                    hr.style.display = null;
+                    var incoming_container = document.getElementById("main_url_incoming_container");
+                    incoming_container.style.display = null;
+
+                    var outgoing_container = document.getElementById("main_url_outgoing_container");
+                    outgoing_container.style.display = null;
                     
                     incoming.innerHTML = "";
                     outgoing.innerHTML = "";
@@ -71,22 +77,43 @@ ymt.view = {
                     });
 
                     if ((e.incoming.length == 0) || (e.incoming.length == 1 && e.incoming[0] === ymt.view.constants.CHROME_NEWTAB)) {
-                        var title = document.getElementById("main_url_incoming_title");
-                        title.style.display = "none";
-
-                        var hr = document.getElementById("main_url_incoming_hr");
-                        hr.style.display = "none";
+                        var incoming_container = document.getElementById("main_url_incoming_container");
+                        incoming_container.style.display = "none";
                     }
 
                     if (e.outgoing.length == 0) {
-                        var title = document.getElementById("main_url_outgoing_title");
-                        title.style.display = "none";
+                        var outgoing_container = document.getElementById("main_url_outgoing_container");
+                        outgoing_container.style.display = "none";
                     }
 
                     document.getElementById("main_url_title").innerHTML = "<a href=\"#\">" + p.page_title + "</a>";
                     document.getElementById("main_url_description").innerHTML = p.description;
                     document.getElementById("main_url_image").setAttribute("src", p.image);
+                } else {
+                    var summary_container = document.getElementById("url_summary_table");
+                    summary_container.style.display = "none";
+
+                    var no_summary_container = document.getElementById("no_summary_info_container");
+                    no_summary_container.style.display = null;
+
+                    var incoming_container = document.getElementById("main_url_incoming_container");
+                    incoming_container.style.display = "none";
+
+                    var outgoing_container = document.getElementById("main_url_outgoing_container");
+                    outgoing_container.style.display = "none";
                 }
+            } else {
+                var summary_container = document.getElementById("url_summary_table");
+                summary_container.style.display = "none";
+
+                var no_summary_container = document.getElementById("no_summary_info_container");
+                no_summary_container.style.display = null;
+
+                var incoming_container = document.getElementById("main_url_incoming_container");
+                incoming_container.style.display = "none";
+
+                var outgoing_container = document.getElementById("main_url_outgoing_container");
+                outgoing_container.style.display = "none";
             }
             
         });
@@ -99,6 +126,8 @@ window.addEventListener('DOMContentLoaded', function(evt) {
     var nodes = [];
     var edges = [];
 
+    var nodes_with_incoming = {};
+
     var nodes_hash = {};
     var edges_hash = {};
     
@@ -107,6 +136,7 @@ window.addEventListener('DOMContentLoaded', function(evt) {
         // Constants for node types in vis js
         var NODE_TYPE = "image";
         var ICON_URL  = "http://flyosity.com/images/_blogentries/networkicon/stepfinal2.png";
+        var ICON_URL  = "http://iconlogisticsgh.com/wp-content/uploads/2014/04/globe.png";
         var MAX_CHAR  = 20;
 
         // Get data sources from background page
@@ -139,6 +169,7 @@ window.addEventListener('DOMContentLoaded', function(evt) {
 
                 if (nodes_hash[node_name] === undefined) {
                     var page = ds_page_info[node_name];
+                    var root_icon = "https://cdn2.iconfinder.com/data/icons/Siena/256/globe.png";
 
                     if (page === undefined) {
                         // Page info is not available, can't really do anything, so just use url
@@ -146,7 +177,7 @@ window.addEventListener('DOMContentLoaded', function(evt) {
                             id     : node_name, 
                             label  : node_name.slice(0, MAX_CHAR), 
                             shape  : NODE_TYPE,
-                            image  : ICON_URL,
+                            image  : ( node_name === ymt.view.constants.CHROME_NEWTAB ? root_icon : ICON_URL ),
                             title  : node_name,
                             fault  : ymt.view.constants.NODE_STATUS.NO_PAGE_INFO
                         };
@@ -180,7 +211,7 @@ window.addEventListener('DOMContentLoaded', function(evt) {
                     nodes_hash[node_name] = node;
                 }
             });
-            
+
             if (source !== target) {
                 var edge_data = ymt.view.edge_data;
 
@@ -195,13 +226,32 @@ window.addEventListener('DOMContentLoaded', function(evt) {
                 ymt.view.edge_data[target] = current_target;
 
                 if (edges_hash[source + target] === undefined) {
+                    nodes_with_incoming[target] = true;
                     edges.push({"from": source, "to": target, "arrows": "to"});
                     edges_hash[source + target] = edges[edges.length - 1];
                 }
             }
         });
-
         
+        // Add edge for all orphans
+        var nodes_with_no_incoming = {};
+        nodes.forEach(function(node) {
+            if (!(node.id in nodes_with_incoming)) {
+                nodes_with_no_incoming[node.id] = node;
+            }
+        });
+
+        if (Object.keys(nodes_with_no_incoming).length > 1) {
+            var root = nodes_with_no_incoming[ymt.view.constants.CHROME_NEWTAB];
+            Object.keys(nodes_with_no_incoming).forEach(function(k) {
+                if (k !== ymt.view.constants.CHROME_NEWTAB) {
+                    console.log('Edge:', root.id, k);
+                    edges.push({"from": root.id, "to": k, "arrows": "to"});
+                    edges_hash[root + k] = edges[edges.length - 1];
+                }
+            });
+        }
+
         // Remove faulty nodes and edges
 
         var nodes_to_remove = [];
@@ -223,7 +273,25 @@ window.addEventListener('DOMContentLoaded', function(evt) {
                     var faulty_source = edge_data.incoming[0];
                     var faulty_target = edge_data.outgoing[0];
 
-                    console.log("Faulty source and target:", faulty_source, faulty_target);
+                    var faulty_source_edge_data = ymt.view.edge_data[faulty_source];
+                    var new_outgoing = [];
+                    faulty_source_edge_data.outgoing.forEach(function(outgoing_url) {
+                        if (outgoing_url !== node.id) {
+                            new_outgoing.push(outgoing_url);
+                        }
+                    });
+                    new_outgoing.push(faulty_target);
+                    ymt.view.edge_data[faulty_source].outgoing = new_outgoing;
+
+                    var faulty_target_edge_data = ymt.view.edge_data[faulty_target];
+                    var new_incoming = [];
+                    faulty_target_edge_data.incoming.forEach(function(incoming_url) {
+                        if (incoming_url !== node.id) {
+                            new_incoming.push(incoming_url);
+                        }
+                    });
+                    new_incoming.push(faulty_source);
+                    ymt.view.edge_data[faulty_target].incoming = new_incoming;
 
                     if (edges_hash[faulty_source + faulty_target] === undefined) {
                         edges.push({"from": faulty_source, "to": faulty_target, "arrows": "to"});

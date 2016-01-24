@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+
+<script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.js"></script>
+
+<style type="text/css">
+    .grid-item { 
+        border: solid thin;
+        width: 200px; 
+        background: aliceblue;
+    }
+    .grid-item--width2 { 
+        width: 400px; 
+        border: solid thin;
+        background: #ccc;
+    }
+</style>
+
+<div style="width:600px; border:1px solid #ccc;">
+<img src="http://www.download-free-wallpaper.com/img19/fucfanipokuydidfmaix.jpg" align="left" width="150px" style="padding-bottom:5px;padding-right:5px;"> 
+<div><a href="#">Data is title here for placeholder | BBC News</a></div>
+At the age of 15 Borg represented Sweden in the 1972 Davis Cup and won his debut singles rubber in five sets against veteran Onny Parun of New Zealand. Later that year, he won the Wimbledon junior singles title, recovering from a 5–2 deficit in the final set to overcome Britain's Buster Mottram. Then in December he won the Orange Bowl Junior Championship for boys, 18 and under after a straight sets victory in the final over Vitas Gerulaitis.[10][11]
+
+Borg joined the professional circuit in 1973, reaching the fourth round of his first French Open and the quarterfinals of Wimbledon. Just before his 18th birthday in 1974, Borg won his first top-level singles title at the Italian Open, becoming its youngest winner. Two weeks later he won the French Open, defeating Manuel Orantes in the final in five sets. Barely 18, Borg was the youngest-ever male French Open champion up to that point.
+
+</div>
+
+<hr/>
+
+<div class="grid" style="border:solid thin;">
+  <div class="grid-item" style="height:200px;">...</div>
+  <div class="grid-item grid-item--width2" style="height:100px;">...</div>
+  <div class="grid-item" style="height:300px;">...</div>
+  <div class="grid-item" style="height:200px;">...</div>
+  <div class="grid-item grid-item--width2" style="height:100px;">...</div>
+  <div class="grid-item" style="height:300px;">...</div>
+  <div class="grid-item" style="height:200px;">...</div>
+  <div class="grid-item grid-item--width2" style="height:100px;">...</div>
+  <div class="grid-item" style="height:300px;">...</div>
+</div>
+
+<script type="text/javascript">
+    window.onload = function() {
+        var elem = document.querySelector('.grid');
+        var msnry = new Masonry( elem, {
+          // options
+          itemSelector: '.grid-item',
+          columnWidth: 200
+        });
+
+        // element argument can be a selector string
+        //   for an individual element
+        var msnry = new Masonry( '.grid', {
+          // options
+        });
+    };
+</script>
+
+
