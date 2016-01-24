@@ -1,6 +1,8 @@
 var bgraph = bgraph || {};
 
 bgraph.bg_page = {
+
+    record: true,
     
     NS: {
         TAB_STACK  : "tab_stack___",
@@ -51,6 +53,10 @@ bgraph.bg_page = {
 // When a tab is created
 chrome.tabs.onCreated.addListener(function(tab) {
 
+    if (!bgraph.bg_page.record) {
+        return;
+    }
+
     var objref = bgraph.bg_page;
 
     // Save new tab to tab stack
@@ -65,31 +71,42 @@ chrome.tabs.onCreated.addListener(function(tab) {
 
 // When content script sends a message after page load
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)  { 
-    
-    var objref = bgraph.bg_page;
-    
-    // Save tab information and page information
-    objref.saveTabStack(sender.tab);
-    objref.data.page_info[sender.tab.url] = message;
 
-    // When the tab has origin, add and edge between links of the two
-    var tab_origin = objref.data.origin[objref.NS.TAB_ORIGIN + sender.tab.id];
-    if (tab_origin !== undefined && tab_origin.id !== sender.tab.id) {
-        var source          = tab_origin.url;
-        var target_tabstack = objref.data.stack[objref.NS.TAB_STACK + sender.tab.id];
-        var target          = target_tabstack[0].url;
+    if (message.from === "popup___record_roggle") {
+        bgraph.bg_page.record = message.toggle;
+    } else {
+        if (!bgraph.bg_page.record) {
+            return;
+        }
+        var objref = bgraph.bg_page;
+        
+        // Save tab information and page information
+        objref.saveTabStack(sender.tab);
+        objref.data.page_info[sender.tab.url] = message;
 
-        objref.data.edge[objref.NS.EDGE + source + target] = {
-            source          : source, 
-            target          : target,
-            source_tab_id   : tab_origin.id, 
-            target_tab_id   : sender.tab.id
-        };
+        // When the tab has origin, add and edge between links of the two
+        var tab_origin = objref.data.origin[objref.NS.TAB_ORIGIN + sender.tab.id];
+        if (tab_origin !== undefined && tab_origin.id !== sender.tab.id) {
+            var source          = tab_origin.url;
+            var target_tabstack = objref.data.stack[objref.NS.TAB_STACK + sender.tab.id];
+            var target          = target_tabstack[0].url;
+
+            objref.data.edge[objref.NS.EDGE + source + target] = {
+                source          : source, 
+                target          : target,
+                source_tab_id   : tab_origin.id, 
+                target_tab_id   : sender.tab.id
+            };
+        }
     }
 });
 
 // When a tab is replaced internally by Chrome
 chrome.tabs.onReplaced.addListener(function(new_tab_id, old_tab_id) {
+
+    if (!bgraph.bg_page.record) {
+        return;
+    }
     
     var objref = bgraph.bg_page;
 

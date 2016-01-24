@@ -136,7 +136,7 @@ window.addEventListener('DOMContentLoaded', function(evt) {
         // Constants for node types in vis js
         var NODE_TYPE = "image";
         var ICON_URL  = "http://flyosity.com/images/_blogentries/networkicon/stepfinal2.png";
-        var ICON_URL  = "http://iconlogisticsgh.com/wp-content/uploads/2014/04/globe.png";
+        //var ICON_URL  = "http://iconlogisticsgh.com/wp-content/uploads/2014/04/globe.png";
         var MAX_CHAR  = 20;
 
         // Get data sources from background page
