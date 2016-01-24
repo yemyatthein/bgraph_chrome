@@ -3,12 +3,12 @@
 
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
-	<link href="styles/vendors/vis.css" rel="stylesheet" type="text/css"/>
-	<link href="styles/view.css" rel="stylesheet" type="text/css"/>
+	<link href="../styles/vendors/vis.css" rel="stylesheet" type="text/css"/>
+	<link href="../styles/view.css" rel="stylesheet" type="text/css"/>
 
-	<script src="js/vendors/jquery.min.js"></script>
-	<script type="text/javascript" src="js/vendors/vis.js"></script>
-	<script type="text/javascript" src="js/view.js"></script>
+	<script type="text/javascript" src="../js/vendors/jquery.min.js"></script>
+	<script src="../js/vendors/masonry.pkgd.js"></script>
+	<script type="text/javascript" src="../js/view_list.js"></script>
 </head>
 
 <body>
@@ -17,15 +17,22 @@
 	    <div class="row">
 	        <div class="bscol_veritcal_navbar col-md-2">
 	            <ul class="vertical_navbar nav nav-pills nav-stacked">
-	               <li><a class="active" href="view.html">Browsing Graph</a></li>
-	               <li><a href="view_list.html">Resource List</a></li>
+	               <li><a href="view.html">Browsing Graph</a></li>
+	               <li><a class="active" href="view_list.html">Resource List</a></li>
 	               <li><a href="">Save Concept</a></li>
 	            </ul>
 	        </div>
-
 	        <div class="bscol_main_content_holder col-md-10">
 	            <div class="col-md-8">
-	                <div id="mynetwork" class="left_holder"></div>
+	            	<div id="mynetwork" class="left_holder">
+	            		<div class="loading_icon_container">
+		            		<img src="https://mmstatic.thcdn.com/4.00.27.9059/img/ajax-loader7.gif" width="30px">
+		            		<span>Loading the resource list</span>
+		            	</div>
+
+	                	<div class="grid" id="res_list">
+						</div>
+	                </div>
 	            </div>
 	            <div class="bscol_url_summary_holder col-md-4">
 	                
@@ -48,18 +55,6 @@
 		                        </td>
 		                    </tr>
 		                </table>
-	                </div>
-
-	                <hr/>
-
-	                <div id="main_url_incoming_container" style="display:none;">
-		                <div><b>Incoming links</b></div>
-		                <div id="main_url_incoming"></div>
-	            	</div>
-
-	            	<div id="main_url_outgoing_container" style="display:none;">
-	                	<div><b>Outgoing links</b></div>
-	                	<div id="main_url_outgoing"> </div>
 	                </div>
 
 	            </div>
