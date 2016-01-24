@@ -4,10 +4,15 @@
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
 
+	<link href="bootstrap-switch/css/bootstrap3/bootstrap-switch.css" rel="stylesheet">
+	<script src="jquery.min.js"></script>
+	<script src="bootstrap-switch/js/bootstrap-switch.js"></script>
+
 	<style type="text/css">
 		div#main_content {
 			display: inline-block;
 			padding: 10px;
+			width: 350px;
 		}
 	</style>
 
@@ -16,7 +21,24 @@
 
 <body>
 	<div id="main_content">
-		<button class="btn btn-primary" id="view_bgraph">View Browsing Graph</b>
+		<div>
+			<table>
+				<tr>
+					<td>
+						<span style="color:grey;">Currently researching about:</span>
+					</td>
+					<td style="text-align:left; padding-left:10px;">
+						<input type="checkbox" name="my-checkbox" checked title="Recording browing graph">
+					</td>
+				</tr>
+			</table>
+			<h3 style="color:#9E6515; text-decoration:line-through;">Australian Open</h3>
+		</div>
+		<hr/>
+		<div>
+			<button class="btn btn-primary" id="view_bgraph">View Browsing Graph</button>
+			<button class="btn btn-primary" id="view_bgraph">Create New</button>
+		</div>
 	</div>
 </body>
 

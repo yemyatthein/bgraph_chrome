@@ -92,6 +92,8 @@ window.addEventListener('DOMContentLoaded', function(evt) {
                         loading_icons[ind].style.display = "none";
                     });
 
+                    document.getElementById("mynetwork").style.height = "100%";
+
                 }, 500);
             }
 

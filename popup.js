@@ -8,6 +8,7 @@ ymt.popup = {
 }
 
 window.addEventListener('DOMContentLoaded', function(evt) {
+    $("[name='my-checkbox']").bootstrapSwitch({size: "mini"});
     document.getElementById("view_bgraph").addEventListener("click", ymt.popup.view_bgraph);
 });
 
