@@ -20,6 +20,11 @@ div#main_url_outgoing_container {
     margin-top: 15px;
 }
 
+div.grid {
+    padding: 3px; 
+    padding-left: 7px;
+}
+
 div.grid-item {
     width: 155px;
     cursor: pointer;

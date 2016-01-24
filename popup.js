@@ -9,10 +9,13 @@ ymt.popup = {
 
 window.addEventListener('DOMContentLoaded', function(evt) {
     $("[name='my-checkbox']").bootstrapSwitch({size: "mini"});
-    document.getElementById("view_bgraph").addEventListener("click", ymt.popup.view_bgraph);
+    
+    $("#view_bgraph").click(ymt.popup.view_bgraph);
+    
     $("#record_toggle").on('switchChange.bootstrapSwitch', function(event, state) {
         chrome.runtime.sendMessage({
-            from    : "popup___record_roggle",
+            from    : "popup",
+            actiom  : "record_toggle",
             toggle  : state
         });
     });

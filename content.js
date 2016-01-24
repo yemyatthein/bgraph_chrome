@@ -1,6 +1,4 @@
-console.log("Content JS starts.");
-
-// Description
+// Get description
 
 var meta = document.getElementsByTagName("meta");
 var meta = Object.keys(meta).map(function(k) { 
@@ -20,9 +18,9 @@ if (desc_meta.length > 0) {
     description = desc_meta[0].getAttribute("content");
 }
 
-// Image
+// Get image
 
-var default_image = "http://www.tampabay.com/resources/images/dti/rendered/2015/09/tbw_meditationb092515_15944893_8col.jpg";
+var DEFAULT_IMAGE = "http://www.tampabay.com/resources/images/dti/rendered/2015/09/tbw_meditationb092515_15944893_8col.jpg";
 
 var image = document.getElementsByTagName("meta");
 var image = Object.keys(image).map(function(k) { 
@@ -37,11 +35,10 @@ if (img_meta.length > 0) {
     var ideal = img_meta[0].getAttribute("content");
 }
 
+// Now send page information to background page
 chrome.runtime.sendMessage({
-    "page_url"      : document.location.href,
-    "page_title"    : document.title,
-    "description"   : description,
-    "image"         : ideal || default_image
+    page_url      : document.location.href,
+    page_title    : document.title,
+    description   : description,
+    image         : ideal || DEFAULT_IMAGE
 });
-
-console.log("Content JS ends.");

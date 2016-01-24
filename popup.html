@@ -3,19 +3,11 @@
 
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+	<link href="styles/vendors/bootstrap-switch.css" rel="stylesheet">
+	<link href="styles/popup.css" rel="stylesheet">
 
-	<link href="bootstrap-switch/css/bootstrap3/bootstrap-switch.css" rel="stylesheet">
-	<script src="jquery.min.js"></script>
-	<script src="bootstrap-switch/js/bootstrap-switch.js"></script>
-
-	<style type="text/css">
-		div#main_content {
-			display: inline-block;
-			padding: 10px;
-			width: 350px;
-		}
-	</style>
-
+	<script type="text/javascript" src="js/vendors/jquery.min.js"></script>
+	<script type="text/javascript" src="js/vendors/bootstrap-switch.js"></script>
 	<script type="text/javascript" src="popup.js"></script>
 </head>
 
@@ -25,19 +17,19 @@
 			<table>
 				<tr>
 					<td>
-						<span style="color:grey;">Currently researching about:</span>
+						<span>Currently researching about:</span>
 					</td>
-					<td style="text-align:left; padding-left:10px;">
-						<input type="checkbox" id="record_toggle" name="my-checkbox" checked title="Recording browing graph">
+					<td class="toggle_container">
+						<input type="checkbox" id="record_toggle" name="my-checkbox" checked />
 					</td>
 				</tr>
 			</table>
-			<h3 style="color:#9E6515;">Australian Open</h3>
+			<h3 class="current_concept_title">Australian Open</h3>
 		</div>
 		<hr/>
 		<div>
 			<button class="btn btn-primary" id="view_bgraph">View Graph</button>
-			<button class="btn btn-primary disabled" id="view_bgraph">Create New</button>
+			<button class="btn btn-primary" id="view_bgraph">Create New</button>
 			<button class="btn btn-primary" id="view_bgraph">End Current</button>
 		</div>
 	</div>

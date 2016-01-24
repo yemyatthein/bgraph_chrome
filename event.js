@@ -2,7 +2,8 @@ var bgraph = bgraph || {};
 
 bgraph.bg_page = {
 
-    record: true,
+    // Whether to save tab/url informations when an event occurs
+    record_switch: true,
     
     NS: {
         TAB_STACK  : "tab_stack___",
@@ -53,7 +54,7 @@ bgraph.bg_page = {
 // When a tab is created
 chrome.tabs.onCreated.addListener(function(tab) {
 
-    if (!bgraph.bg_page.record) {
+    if (!bgraph.bg_page.record_switch) {
         return;
     }
 
@@ -72,10 +73,10 @@ chrome.tabs.onCreated.addListener(function(tab) {
 // When content script sends a message after page load
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)  { 
 
-    if (message.from === "popup___record_roggle") {
-        bgraph.bg_page.record = message.toggle;
+    if (message.from === "popup" && message === "record_toggle") {
+        bgraph.bg_page.record_switch = message.toggle;
     } else {
-        if (!bgraph.bg_page.record) {
+        if (!bgraph.bg_page.record_switch) {
             return;
         }
         var objref = bgraph.bg_page;
@@ -104,7 +105,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)  {
 // When a tab is replaced internally by Chrome
 chrome.tabs.onReplaced.addListener(function(new_tab_id, old_tab_id) {
 
-    if (!bgraph.bg_page.record) {
+    if (!bgraph.bg_page.record_switch) {
         return;
     }
     
@@ -143,13 +144,4 @@ chrome.tabs.onReplaced.addListener(function(new_tab_id, old_tab_id) {
 // cross tab    : origin
 // 
 // else, tab  1-2 links <- dummies
-
-
-
-
-
-
-
-
-
 

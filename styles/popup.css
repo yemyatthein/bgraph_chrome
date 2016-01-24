@@ -1,0 +1,15 @@
+div#main_content {
+	display: inline-block;
+	padding: 10px;
+	width: 350px;
+	color: #585858;
+}
+
+h3.current_concept_title {
+	color: #9E6515;
+}
+
+td.toggle_container {
+	text-align: left; 
+	padding-left: 10px;
+}
