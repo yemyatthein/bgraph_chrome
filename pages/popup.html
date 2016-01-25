@@ -13,25 +13,41 @@
 
 <body>
 	<div id="main_content">
-		<div>
-			<table>
-				<tr>
-					<td>
-						<span>Currently researching about:</span>
-					</td>
-					<td class="toggle_container">
-						<input type="checkbox" id="record_toggle" name="my-checkbox" checked />
-					</td>
-				</tr>
-			</table>
-			<h3 class="current_concept_title">Australian Open</h3>
+		
+		<div id="new_topic_ask_container" style="width:200px;">
+			<span>Browsing Graph captures the links as you go along.</span>
+			<div class="new_topic_container" style="margin-top:15px; text-align:center;">
+				<button id="btn_new_topic" class="btn btn-primary">Create New Topic</button>
+			</div>
 		</div>
-		<hr/>
-		<div>
-			<button class="btn btn-primary" id="view_bgraph">View Graph</button>
-			<button class="btn btn-primary" id="view_bgraph">Create New</button>
-			<button class="btn btn-primary" id="view_bgraph">End Current</button>
+
+		<div id="new_topic_form_container" style="">
+			<div style="margin-bottom:10px;">Topic Name:</div>
+			<div style="margin-bottom:10px;"><input type="text" id="topic_name"></div>
+			<div style=""><button class="btn btn-primary">Create</button></div>
 		</div>
+
+		<div id="currently_pursuing" style="width:320px; color:grey">
+			<div>
+				<table style="width:100%">
+					<tr>
+						<td>
+							<span>Currently researching about:</span>
+						</td>
+					</tr>
+				</table>
+				<h2 class="current_concept_title">Australian Open</h2>
+			</div>
+			<hr/>
+			<div>
+				<input type="checkbox" id="record_toggle" name="my-checkbox" checked />
+				<button class="btn btn-primary" id="view_bgraph">View Browsing Graph</button>
+				<a href="#" class="btn btn-info btn-md">
+		          <span class="glyphicon glyphicon-menu-hamburger"></span>
+		        </a>
+			</div>
+		</div>
+
 	</div>
 </body>
 
