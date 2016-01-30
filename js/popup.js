@@ -20,5 +20,20 @@ window.addEventListener('DOMContentLoaded', function(evt) {
             toggle  : state
         });
     });
+
+    $("#btn_new_topic").on("click", function() {
+        $("#new_topic_ask_container").hide();
+        $("#new_topic_form_container").show();
+    });
+
+    $("#btn_create_now").on("click", function() {
+        //$("#new_topic_form_container").hide();
+        $("#new_topic_ask_container").hide();
+        $("#currently_pursuing").show();
+        
+        if ($("#topic_name").val()) {
+            $("#current_concept_title").text($("#topic_name").val());
+        }
+    });
 });
 

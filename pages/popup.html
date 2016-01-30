@@ -7,6 +7,7 @@
 	<link href="../styles/popup.css" rel="stylesheet">
 
 	<script type="text/javascript" src="../js/vendors/jquery.min.js"></script>
+	<script src="../bootstrap.min.js"></script>
 	<script type="text/javascript" src="../js/vendors/bootstrap-switch.js"></script>
 	<script type="text/javascript" src="../js/popup.js"></script>
 </head>
@@ -14,20 +15,18 @@
 <body>
 	<div id="main_content">
 		
-		<div id="new_topic_ask_container" style="width:200px;">
-			<span>Browsing Graph captures the links as you go along.</span>
-			<div class="new_topic_container" style="margin-top:15px; text-align:center;">
-				<button id="btn_new_topic" class="btn btn-primary">Create New Topic</button>
+		<div id="new_topic_ask_container">
+			<span><h5>Browsing Graph captures a concept you define.</h5></span>
+			<hr/>
+			<div class="new_topic_container" style="">
+				<div style="margin-bottom:10px;">
+					<input type="text" placeholder="Create a New Topic" style="color:#000; width:275px; height:33px; margin-right:3px;" id="topic_name">
+					<button id="btn_create_now" class="btn btn-primary">Create</button>
+				</div>
 			</div>
 		</div>
 
-		<div id="new_topic_form_container" style="">
-			<div style="margin-bottom:10px;">Topic Name:</div>
-			<div style="margin-bottom:10px;"><input type="text" id="topic_name"></div>
-			<div style=""><button class="btn btn-primary">Create</button></div>
-		</div>
-
-		<div id="currently_pursuing" style="width:320px; color:grey">
+		<div id="currently_pursuing" style="width:320px; color:grey; display:none;">
 			<div>
 				<table style="width:100%">
 					<tr>
@@ -36,16 +35,29 @@
 						</td>
 					</tr>
 				</table>
-				<h2 class="current_concept_title">Australian Open</h2>
+				<h2 class="current_concept_title" id="current_concept_title">Australian Open</h2>
 			</div>
 			<hr/>
 			<div>
-				<input type="checkbox" id="record_toggle" name="my-checkbox" checked />
-				<button class="btn btn-primary" id="view_bgraph">View Browsing Graph</button>
-				<a href="#" class="btn btn-info btn-md">
-		          <span class="glyphicon glyphicon-menu-hamburger"></span>
-		        </a>
+				<div style="display:none"><input type="checkbox" id="record_toggle" name="my-checkbox" checked /></div>
+				<button class="btn btn-primary" id="view_bgraph">View Graph</button>
+				<button class="btn btn-primary" id="view_bgraph">End Now</button>
+				
+
+				<span class="dropdown">
+				    <button class="btn btn-primary dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">More
+				    <span class="caret"></span></button>
+				    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="margin:15px;margin-right:15px;margin-left:-30px;">
+				      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>
+				      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
+				      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
+				      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Java</a></li>
+				      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Erlang</a></li>
+				    </ul>
+				  </span>
+
 			</div>
+
 		</div>
 
 	</div>

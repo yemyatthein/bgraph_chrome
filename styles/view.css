@@ -1,12 +1,40 @@
-.container {
+div.bscol_veritcal_navbar {
+    padding-right: 0px;
+}
+div.bscol_main_content_holder {
+    padding-left: 0px;
+}
+div.bscol_url_summary_holder {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+h2.current_concept_title {
+    color: #FFFFFF;
+    margin-top: 10px;
+}
+
+div.container {
     width: 100%;
     padding-top: 10px;
+}
+
+div.container_content_part {
+    margin-top: -15px;
 }
 
 div#mynetwork {
     height: 450px;
     background: #EFF5FB;
     border: 1px solid #ccc;
+}
+
+div#main_url_incoming {
+    margin-top: 5px;
+}
+
+div#main_url_outgoing {
+    margin-top: 5px;
 }
 
 div.loading_icon_container {
@@ -44,19 +72,8 @@ div.url_summary_container {
     border: 1px solid #ccc;
 }
 
-.left_holder {
+div.left_holder {
     width: 100%;
-}
-
-div.bscol_veritcal_navbar {
-    padding-right: 0px;
-}
-div.bscol_main_content_holder {
-    padding-left: 0px;
-}
-div.bscol_url_summary_holder {
-    padding-left: 0px;
-    padding-right: 0px;
 }
 
 div.rel_link_container {

@@ -110,7 +110,7 @@ window.addEventListener('DOMContentLoaded', function(evt) {
                 selected.style.background = "#fff";
              }
              selected = this;
-             this.style.background = "#D7C7B0";
+             this.style.background = "#99c2ff";
 
              document.getElementById("no_summary_info_container").style.display = "none";
              document.getElementById("url_summary_table").style.display = null;

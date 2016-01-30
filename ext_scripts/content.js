@@ -35,10 +35,34 @@ if (img_meta.length > 0) {
     var ideal = img_meta[0].getAttribute("content");
 }
 
+// Get favicon
+
+DEFAULT_FAVICON = "http://flyosity.com/images/_blogentries/networkicon/stepfinal2.png";
+
+var favicon = DEFAULT_FAVICON;
+
+var links = document.getElementsByTagName("link");
+var links = Object.keys(links).map(function(k) { 
+    return links[k]; 
+});
+links.forEach(function(link) {
+    var type = link.getAttribute("type");
+    if (type === "image/png" || type === "image/x-icon") {
+        var href = link.getAttribute("href");
+        if (href.startsWith("http")) {
+            favicon = href;
+            console.log("In-loop, Favicon is ", favicon);
+        }
+    }
+});
+
+console.log("Finally, Favicon is ", favicon);
+
 // Now send page information to background page
 chrome.runtime.sendMessage({
     page_url      : document.location.href,
     page_title    : document.title,
     description   : description,
-    image         : ideal || DEFAULT_IMAGE
+    image         : ideal || DEFAULT_IMAGE,
+    favicon       : favicon
 });
