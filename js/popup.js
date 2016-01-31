@@ -31,10 +31,15 @@ window.addEventListener('DOMContentLoaded', function(evt) {
             $("#unsaved_warning").show();
         });
 
+        $("#new_bgraph").click(function() {
+            $("#unsaved_warning").show();
+        });
+
         $(document).click(function(e) {
             if( e.target.id !== 'unsaved_warning' && e.target.id !== "end_bgraph" && 
-                e.target.id !== "unsaved_end_proceed") {
-                
+                e.target.id !== "unsaved_end_proceed" && e.target.id !== "new_bgraph" &&
+                e.target.id !== "warning_content_container") {
+
                 $("#unsaved_warning").hide();
             }
         });

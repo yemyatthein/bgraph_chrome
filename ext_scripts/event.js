@@ -18,6 +18,10 @@ bgraph.bg_page = {
         edge         : {}
     },
 
+    checkValid: function() {
+        return (this.data.concept_name !== undefined);
+    },
+
     endConcept: function() {
         this.data = {
             concept_name : undefined,

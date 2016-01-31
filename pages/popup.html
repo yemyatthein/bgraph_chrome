@@ -21,8 +21,11 @@
     	</div>
 
     	<div id="unsaved_warning" style="display:none;">
-	    	<div class="alert alert-warning">
-				Ending concept will discard all data about <strong id="current_concept_title_warning">Popular Music</strong>. Are you sure want to proceed?
+    		<div style="float:right; margin-right:10px; margin-top:3px;">
+    			<button type="button" id="close_warning_btn" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+    		</div>
+	    	<div class="alert alert-warning" id="warning_content_container">
+				This action will discard all data about <strong id="current_concept_title_warning">Popular Music</strong>. Are you sure want to proceed?
 				<div style="text-align:right; margin-top:15px;">
 					<button class="btn btn-default" id="unsaved_end_proceed">Proceed</button>
 					<button class="btn btn-default" id="">Save</button>
@@ -63,7 +66,7 @@
 				    <button class="btn btn-primary dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">More
 				    <span class="caret"></span></button>
 				    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="margin:10px; min-width:100px;">
-				      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">New</a></li>
+				      <li role="presentation"><a role="menuitem" tabindex="-1" id="new_bgraph" href="#">New</a></li>
 				      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Save</a></li>
 				    </ul>
 				  </span>
