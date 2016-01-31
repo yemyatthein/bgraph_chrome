@@ -183,6 +183,14 @@ chrome.tabs.onReplaced.addListener(function(new_tab_id, old_tab_id) {
 });
 
 
+// When event page is unloaded, store data in indexedDB/localstorage
+//
+chrome.runtime.onSuspend.addListener(function() {
+    console.log("DEBUG: Event page is unloaded at " + new Date() + ".");
+    localStorage.setItem("xxx_" + Number(new Date()), "Saved!")
+});
+
+
 // Dev Notes:
 // 
 // new tab      : chrome/tab (0)
