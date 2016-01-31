@@ -17,9 +17,11 @@ ymt.view = {
 
     renderGraph: function (nodes, edges) {
 
+        // Convert to vis data format
         nodes = new vis.DataSet(nodes);
         edges = new vis.DataSet(edges);
 
+        var objref    = this;
         var container = document.getElementById('mynetwork');
         
         var options = {};
@@ -27,21 +29,27 @@ ymt.view = {
         
         var network = new vis.Network(container, data, options);
 
-        var objref = this;
         network.on("click", function (params) {
             if (params.nodes.length > 0) {
+                // Clicking on a node
+                
                 var p = objref.page_info[params.nodes[0]];
-                var e = objref.edge_data[params.nodes[0]];
-
-                if (p !== undefined && e !== undefined) {
-                    var incoming       = document.getElementById("main_url_incoming");
-                    var outgoing       = document.getElementById("main_url_outgoing");
+                
+                if (p) {
                     
-                    var summary_container = document.getElementById("url_summary_table");
-                    summary_container.style.display = null;
+                    // Main url info
+                    document.getElementById("main_url_title").innerHTML = "<a href=\"#\">" + p.page_title + "</a>";
+                    document.getElementById("main_url_description").innerHTML = p.description;
+                    document.getElementById("main_url_image").setAttribute("src", p.image);
 
+                    var incoming = document.getElementById("main_url_incoming");
+                    var outgoing = document.getElementById("main_url_outgoing");
+                    
                     var no_summary_container = document.getElementById("no_summary_info_container");
                     no_summary_container.style.display = "none";
+
+                    var summary_container = document.getElementById("url_summary_table");
+                    summary_container.style.display = null;
 
                     var incoming_container = document.getElementById("main_url_incoming_container");
                     incoming_container.style.display = null;
@@ -51,45 +59,59 @@ ymt.view = {
                     
                     incoming.innerHTML = "";
                     outgoing.innerHTML = "";
-                    
-                    e.incoming.forEach(function(url) {
-                        if (url !== ymt.view.constants.CHROME_NEWTAB) {
+
+                    var e = objref.edge_data[params.nodes[0]];
+
+                    if (e) {
+
+                        // Render incoming links
+
+                        e.incoming.forEach(function(url) {
+                            if (url !== ymt.view.constants.CHROME_NEWTAB) {
+                                var div  = document.createElement("div");
+                                var attr = document.createAttribute("class");
+                                attr.value = "container rel_link_container";
+                                div.setAttributeNode(attr);
+                                
+                                div.innerHTML = "<div class=\"row\"><div class=\"col-md-1\" style=\"padding-left:5px; " + 
+                                                "padding-right:0px; padding-top:0px;\"><img src=\"" + (objref.page_info[url].favicon) + 
+                                                "\" width=\"16px\" height=\"16px\" /></div><div class=\"col-md-11\" style=\"padding-left:" + 
+                                                "0px; padding-right:0px;\"><a href=\"#\">" + (objref.page_info[url].page_title || url) + 
+                                                "</a></div></div>";
+                                
+                                incoming.appendChild(div);
+                            }
+                        });
+
+                        // Render outgoing links
+
+                        e.outgoing.forEach(function(url) {
                             var div  = document.createElement("div");
                             var attr = document.createAttribute("class");
                             attr.value = "container rel_link_container";
                             div.setAttributeNode(attr);
                             
-                            div.innerHTML = "<div class=\"row\"><div class=\"col-md-1\" style=\"padding-left:5px; padding-right:0px; padding-top:0px;\"><img src=\"" + (objref.page_info[url].favicon) + "\" width=\"16px\" height=\"16px\" /></div><div class=\"col-md-11\" style=\"padding-left:0px; padding-right:0px;\"><a href=\"#\">" + (objref.page_info[url].page_title || url) + "</a></div></div>";
+                            div.innerHTML = "<div class=\"row\"><div class=\"col-md-1\" style=\"padding-left:5px; padding-right:0px; " + 
+                                            "padding-top:0px;\"><img src=\"" + (objref.page_info[url].favicon) + "\" width=\"16px\" height=" + 
+                                            "\"16px\" /></div><div class=\"col-md-11\" style=\"padding-left:0px; padding-right:0px;\"><a " + 
+                                            "href=\"#\">" + (objref.page_info[url].page_title || url) + "</a></div></div>";
                             
-                            incoming.appendChild(div);
+                            outgoing.appendChild(div);
+                        });
+
+                        // No incoming or just a root as incoming node, thus hide the incoming links section
+                        if ((e.incoming.length == 0) || (e.incoming.length == 1 && e.incoming[0] === ymt.view.constants.CHROME_NEWTAB)) {
+                            incoming_container.style.display = "none";
                         }
-                    });
 
-                    e.outgoing.forEach(function(url) {
-                        var div  = document.createElement("div");
-                        var attr = document.createAttribute("class");
-                        attr.value = "container rel_link_container";
-                        div.setAttributeNode(attr);
-                        
-                        div.innerHTML = "<div class=\"row\"><div class=\"col-md-1\" style=\"padding-left:5px; padding-right:0px; padding-top:0px;\"><img src=\"" + (objref.page_info[url].favicon) + "\" width=\"16px\" height=\"16px\" /></div><div class=\"col-md-11\" style=\"padding-left:0px; padding-right:0px;\"><a href=\"#\">" + (objref.page_info[url].page_title || url) + "</a></div></div>";
-                        
-                        outgoing.appendChild(div);
-                    });
-
-                    if ((e.incoming.length == 0) || (e.incoming.length == 1 && e.incoming[0] === ymt.view.constants.CHROME_NEWTAB)) {
-                        var incoming_container = document.getElementById("main_url_incoming_container");
-                        incoming_container.style.display = "none";
+                        // No outgoing node, thus hide the outgoing links section
+                        if (e.outgoing.length == 0) {
+                            outgoing_container.style.display = "none";
+                        }
                     }
-
-                    if (e.outgoing.length == 0) {
-                        var outgoing_container = document.getElementById("main_url_outgoing_container");
-                        outgoing_container.style.display = "none";
-                    }
-
-                    document.getElementById("main_url_title").innerHTML = "<a href=\"#\">" + p.page_title + "</a>";
-                    document.getElementById("main_url_description").innerHTML = p.description;
-                    document.getElementById("main_url_image").setAttribute("src", p.image);
-                } else {
+                    
+                } 
+                else {
                     var summary_container = document.getElementById("url_summary_table");
                     summary_container.style.display = "none";
 
@@ -102,12 +124,15 @@ ymt.view = {
                     var outgoing_container = document.getElementById("main_url_outgoing_container");
                     outgoing_container.style.display = "none";
                 }
-            } else {
-                var summary_container = document.getElementById("url_summary_table");
-                summary_container.style.display = "none";
+            } 
+            else {
+                // Clicking on no node, hide summary info
 
                 var no_summary_container = document.getElementById("no_summary_info_container");
                 no_summary_container.style.display = null;
+
+                var summary_container = document.getElementById("url_summary_table");
+                summary_container.style.display = "none";
 
                 var incoming_container = document.getElementById("main_url_incoming_container");
                 incoming_container.style.display = "none";
@@ -136,6 +161,7 @@ window.addEventListener('DOMContentLoaded', function(evt) {
         // Constants for node types in vis js
         var NODE_TYPE = "image";
         var ICON_URL  = "http://flyosity.com/images/_blogentries/networkicon/stepfinal2.png";
+        var ROOT_ICON = "https://cdn2.iconfinder.com/data/icons/Siena/256/globe.png";
         var MAX_CHAR  = 20;
 
         // Get data sources from background page
@@ -153,30 +179,48 @@ window.addEventListener('DOMContentLoaded', function(evt) {
             var target = obj.target;
 
             if (source.startsWith("___replaced___")) {
+                
                 // Internal tab replacement, get source from origin
                 var tab_id    = source.split("___replaced___")[1].split("___")[0];
                 var tab_stack = ds_stack["tab_stack___" + tab_id];
-                source        = tab_stack[tab_stack.length - 1].url;
+
+                // For some reason replace source tab not available, thus, ignore the source
+                if (tab_stack === undefined) {
+                    source = undefined;
+                    console.log("DEBUG: Replaced tab stack origin (" + tab_id + ") not found.");
+                } 
+                else {
+                    source = tab_stack[tab_stack.length - 1].url;
+                }
+
             } else if (source === "") {
                 // Link with <a href...target="_blank" ..>
+                
                 var tab_origin = ds_origin["tab_origin___" + obj.source_tab_id];
                 var tab_stack  = ds_stack["tab_stack___" + tab_origin.openerTabId];
-                source         = tab_stack[tab_stack.length - 1].url;
+                
+                if (tab_stack) {
+                    source = tab_stack[tab_stack.length - 1].url;
+                }
+                else {
+                    source = undefined;
+                    console.log("DEBUG: Tab stack not found for " + tab_origin.openerTabId + ".")
+                }
             }
 
             [source, target].forEach(function (node_name) {
 
-                if (nodes_hash[node_name] === undefined) {
-                    var page = ds_page_info[node_name];
-                    var root_icon = "https://cdn2.iconfinder.com/data/icons/Siena/256/globe.png";
+                if (node_name && (nodes_hash[node_name] === undefined)) {
 
+                    var page = ds_page_info[node_name];
+                    
                     if (page === undefined) {
                         // Page info is not available, can't really do anything, so just use url
                         var node = {
                             id     : node_name, 
                             label  : node_name.slice(0, MAX_CHAR), 
                             shape  : NODE_TYPE,
-                            image  : ( node_name === ymt.view.constants.CHROME_NEWTAB ? root_icon : ICON_URL ),
+                            image  : ( node_name === ymt.view.constants.CHROME_NEWTAB ? ROOT_ICON : ICON_URL ),
                             title  : node_name,
                             fault  : ymt.view.constants.NODE_STATUS.NO_PAGE_INFO
                         };
@@ -211,21 +255,23 @@ window.addEventListener('DOMContentLoaded', function(evt) {
                 }
             });
 
-            if (source !== target) {
-                var edge_data = ymt.view.edge_data;
+            if (source && (source !== target)) {
 
                 // Remember target as outgoing node in source's edge data
-                var current_source   = edge_data[source] || {"incoming": [], "outgoing": []};
+                var current_source = ymt.view.edge_data[source] || {"incoming": [], "outgoing": []};
                 current_source.outgoing.push(target);
                 ymt.view.edge_data[source] = current_source;
 
                 // Remember source as incoming node in target's edge data
-                var current_target   = edge_data[target] || {"incoming": [], "outgoing": []};
+                var current_target   = ymt.view.edge_data[target] || {"incoming": [], "outgoing": []};
                 current_target.incoming.push(source);
                 ymt.view.edge_data[target] = current_target;
 
                 if (edges_hash[source + target] === undefined) {
+                    
+                    // Record target is a node with at least one incoming edge
                     nodes_with_incoming[target] = true;
+                    
                     edges.push({"from": source, "to": target, "arrows": "to"});
                     edges_hash[source + target] = edges[edges.length - 1];
                 }
@@ -241,14 +287,17 @@ window.addEventListener('DOMContentLoaded', function(evt) {
         });
 
         if (Object.keys(nodes_with_no_incoming).length > 1) {
+            
+            // chrome:tab url
             var root = nodes_with_no_incoming[ymt.view.constants.CHROME_NEWTAB];
+            
             Object.keys(nodes_with_no_incoming).forEach(function(k) {
                 if (k !== ymt.view.constants.CHROME_NEWTAB) {
-                    console.log('Edge:', root.id, k);
                     edges.push({"from": root.id, "to": k, "arrows": "to"});
                     edges_hash[root + k] = edges[edges.length - 1];
                 }
             });
+
         }
 
         // Remove faulty nodes and edges
@@ -269,9 +318,12 @@ window.addEventListener('DOMContentLoaded', function(evt) {
                     if (edge_data.incoming.length > 1 || edge_data.outgoing.length > 1) {
                         return;
                     }
+
+                    // Source and target node to/from the faulty node
                     var faulty_source = edge_data.incoming[0];
                     var faulty_target = edge_data.outgoing[0];
 
+                    // Update edge data of faulty node's incoming node
                     var faulty_source_edge_data = ymt.view.edge_data[faulty_source];
                     var new_outgoing = [];
                     faulty_source_edge_data.outgoing.forEach(function(outgoing_url) {
@@ -282,6 +334,7 @@ window.addEventListener('DOMContentLoaded', function(evt) {
                     new_outgoing.push(faulty_target);
                     ymt.view.edge_data[faulty_source].outgoing = new_outgoing;
 
+                    // Update edge data of faulty node's outgoing node
                     var faulty_target_edge_data = ymt.view.edge_data[faulty_target];
                     var new_incoming = [];
                     faulty_target_edge_data.incoming.forEach(function(incoming_url) {
@@ -292,11 +345,13 @@ window.addEventListener('DOMContentLoaded', function(evt) {
                     new_incoming.push(faulty_source);
                     ymt.view.edge_data[faulty_target].incoming = new_incoming;
 
+                    // Add an edge and update edges hash
                     if (edges_hash[faulty_source + faulty_target] === undefined) {
                         edges.push({"from": faulty_source, "to": faulty_target, "arrows": "to"});
                         edges_hash[faulty_source + faulty_target] = edges[edges.length - 1];
                     }
 
+                    // Nodes and edges to be removed
                     nodes_to_remove.push({ node: node, node_index: index });
                     edges_to_remove.push({ from: faulty_source, to: node.id });
                     edges_to_remove.push({ from: node.id, to: faulty_target });
@@ -305,23 +360,34 @@ window.addEventListener('DOMContentLoaded', function(evt) {
             }
         });
         
+        // Remove nodes and nodes hash
         nodes_to_remove.forEach(function(node_data) {
             delete nodes[node_data.node_index];
+            delete nodes_hash[node_data.node.id];
         });
 
-        // FIXME: Quadratic runtime
+        // Remove edges
+
+        var edges_to_remove_set = {};
+        edges_to_remove.forEach(function(edge_data) {
+            edges_to_remove_set[edge_data.from + edge_data.to] = true;
+        });
+
         var edges_to_remove_ind = [];
         edges.forEach(function(edge, index) {
-            edges_to_remove.forEach(function(edge_data) {
-                if (edge.from === edge_data.from && edge.to === edge_data.to) {
-                    edges_to_remove_ind.push(index);
-                }
-            });            
+            if (edges_to_remove_set[edge.from + edge.to]) {
+                edges_to_remove_ind.push(index);
+
+                // Remove edges hash
+                delete edges_hash[edge.from + edge.to];
+            }
         });
 
         edges_to_remove_ind.forEach(function(k) {
             delete edges[k];
         });
+
+        // Update nodes and edges before rendering in UI
 
         var refined_nodes = [];
         var refined_edges = [];
@@ -338,7 +404,9 @@ window.addEventListener('DOMContentLoaded', function(evt) {
             }
         });
 
+        // Call render function
         ymt.view.renderGraph(refined_nodes, refined_edges);
+
     });
     
 });

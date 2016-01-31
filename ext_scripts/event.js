@@ -110,6 +110,8 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)  {
 // 
 chrome.tabs.onReplaced.addListener(function(new_tab_id, old_tab_id) {
 
+    console.log("DEBUG: Tab " + old_tab_id + " is relaced by " + new_tab_id + ".");
+
     var objref = bgraph.bg_page;
 
     // If tab is a replaced one, put an indicator for later retrieval,
