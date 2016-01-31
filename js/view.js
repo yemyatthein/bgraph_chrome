@@ -36,7 +36,7 @@ ymt.view = {
                 var p = objref.page_info[params.nodes[0]];
                 
                 if (p) {
-                    
+
                     // Main url info
                     document.getElementById("main_url_title").innerHTML = "<a href=\"#\">" + p.page_title + "</a>";
                     document.getElementById("main_url_description").innerHTML = p.description;
@@ -61,6 +61,8 @@ ymt.view = {
                     outgoing.innerHTML = "";
 
                     var e = objref.edge_data[params.nodes[0]];
+
+                    console.log(e, params.nodes[0]);
 
                     if (e) {
 
@@ -278,28 +280,7 @@ window.addEventListener('DOMContentLoaded', function(evt) {
             }
         });
         
-        // Add edge for all orphans
-        var nodes_with_no_incoming = {};
-        nodes.forEach(function(node) {
-            if (!(node.id in nodes_with_incoming)) {
-                nodes_with_no_incoming[node.id] = node;
-            }
-        });
-
-        if (Object.keys(nodes_with_no_incoming).length > 1) {
-            
-            // chrome:tab url
-            var root = nodes_with_no_incoming[ymt.view.constants.CHROME_NEWTAB];
-            
-            Object.keys(nodes_with_no_incoming).forEach(function(k) {
-                if (k !== ymt.view.constants.CHROME_NEWTAB) {
-                    edges.push({"from": root.id, "to": k, "arrows": "to"});
-                    edges_hash[root + k] = edges[edges.length - 1];
-                }
-            });
-
-        }
-
+        
         // Remove faulty nodes and edges
 
         var nodes_to_remove = [];
@@ -323,38 +304,63 @@ window.addEventListener('DOMContentLoaded', function(evt) {
                     var faulty_source = edge_data.incoming[0];
                     var faulty_target = edge_data.outgoing[0];
 
-                    // Update edge data of faulty node's incoming node
                     var faulty_source_edge_data = ymt.view.edge_data[faulty_source];
-                    var new_outgoing = [];
-                    faulty_source_edge_data.outgoing.forEach(function(outgoing_url) {
-                        if (outgoing_url !== node.id) {
-                            new_outgoing.push(outgoing_url);
-                        }
-                    });
-                    new_outgoing.push(faulty_target);
-                    ymt.view.edge_data[faulty_source].outgoing = new_outgoing;
 
-                    // Update edge data of faulty node's outgoing node
-                    var faulty_target_edge_data = ymt.view.edge_data[faulty_target];
-                    var new_incoming = [];
-                    faulty_target_edge_data.incoming.forEach(function(incoming_url) {
-                        if (incoming_url !== node.id) {
-                            new_incoming.push(incoming_url);
-                        }
-                    });
-                    new_incoming.push(faulty_source);
-                    ymt.view.edge_data[faulty_target].incoming = new_incoming;
+                    if (faulty_source_edge_data) {
 
-                    // Add an edge and update edges hash
-                    if (edges_hash[faulty_source + faulty_target] === undefined) {
-                        edges.push({"from": faulty_source, "to": faulty_target, "arrows": "to"});
-                        edges_hash[faulty_source + faulty_target] = edges[edges.length - 1];
+                        // Update edge data of faulty node's incoming node
+                        var new_outgoing = [];
+                        faulty_source_edge_data.outgoing.forEach(function(outgoing_url) {
+                            if (outgoing_url !== node.id) {
+                                new_outgoing.push(outgoing_url);
+                            }
+                        });
+
+                        if (faulty_target) {
+                            new_outgoing.push(faulty_target);
+                        }
+
+                        ymt.view.edge_data[faulty_source].outgoing = new_outgoing;
                     }
 
-                    // Nodes and edges to be removed
+                    var faulty_target_edge_data = ymt.view.edge_data[faulty_target];
+
+                    if (faulty_target_edge_data) {
+
+                        // Update edge data of faulty node's outgoing node
+                        var new_incoming = [];
+                        faulty_target_edge_data.incoming.forEach(function(incoming_url) {
+                            if (incoming_url !== node.id) {
+                                new_incoming.push(incoming_url);
+                            }
+                        });
+                        
+                        if (faulty_source) {
+                            new_incoming.push(faulty_source);
+                        }
+                        
+                        ymt.view.edge_data[faulty_target].incoming = new_incoming;
+
+                        if (ymt.view.edge_data[faulty_target].incoming.length < 1 && 
+                            faulty_target in nodes_with_incoming) {
+
+                            delete nodes_with_incoming[faulty_target];
+                        }
+
+                        // TODO: Reconsider!
+                        // Add an edge and update edges hash
+                        if (edges_hash[faulty_source + faulty_target] === undefined) {
+                            edges.push({"from": faulty_source, "to": faulty_target, "arrows": "to"});
+                            edges_hash[faulty_source + faulty_target] = edges[edges.length - 1];
+                        }
+
+                        // Edges to be removed
+                        edges_to_remove.push({ from: faulty_source, to: node.id });
+                        edges_to_remove.push({ from: node.id, to: faulty_target });
+                    }
+
+                    // Nodes to be removed
                     nodes_to_remove.push({ node: node, node_index: index });
-                    edges_to_remove.push({ from: faulty_source, to: node.id });
-                    edges_to_remove.push({ from: node.id, to: faulty_target });
 
                 }
             }
@@ -404,8 +410,35 @@ window.addEventListener('DOMContentLoaded', function(evt) {
             }
         });
 
+        nodes = refined_nodes;
+        edges = refined_edges;
+
+
+        // Add edge for all orphans
+        var nodes_with_no_incoming = {};
+        nodes.forEach(function(node) {
+            if (!(node.id in nodes_with_incoming)) {
+                nodes_with_no_incoming[node.id] = node;
+            }
+        });
+
+        if (Object.keys(nodes_with_no_incoming).length > 1) {
+            
+            // chrome:tab url
+            var root = nodes_with_no_incoming[ymt.view.constants.CHROME_NEWTAB];
+            
+            Object.keys(nodes_with_no_incoming).forEach(function(k) {
+                if (k !== ymt.view.constants.CHROME_NEWTAB) {
+                    edges.push({"from": root.id, "to": k, "arrows": "to"});
+                    edges_hash[root + k] = edges[edges.length - 1];
+                }
+            });
+
+        }
+
+
         // Call render function
-        ymt.view.renderGraph(refined_nodes, refined_edges);
+        ymt.view.renderGraph(nodes, edges);
 
     });
     

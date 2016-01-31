@@ -15,7 +15,23 @@
 <body>
 	<div id="main_content">
 		
-		<div id="new_topic_ask_container">
+		<div class="loading_icon_container" id="loading_concept">
+    		<img src="https://mmstatic.thcdn.com/4.00.27.9059/img/ajax-loader7.gif" width="30px">
+    		<span>Loading current concept</span>
+    	</div>
+
+    	<div id="unsaved_warning" style="display:none;">
+	    	<div class="alert alert-warning">
+				Ending concept will discard all data about <strong id="current_concept_title_warning">Popular Music</strong>. Are you sure want to proceed?
+				<div style="text-align:right; margin-top:15px;">
+					<button class="btn btn-default" id="unsaved_end_proceed">Proceed</button>
+					<button class="btn btn-default" id="">Save</button>
+				</div>
+			</div>
+			<hr/>
+		</div>
+
+		<div id="new_topic_ask_container" style="display:none;">
 			<span><h5>Browsing Graph captures a concept you define.</h5></span>
 			<hr/>
 			<div class="new_topic_container" style="">
@@ -40,7 +56,7 @@
 			<hr/>
 			<div>
 				<button class="btn btn-primary" id="view_bgraph">View Graph</button>
-				<button class="btn btn-primary" id="view_bgraph">End Now</button>
+				<button class="btn btn-primary" id="end_bgraph">End Now</button>
 				
 
 				<span class="dropdown">

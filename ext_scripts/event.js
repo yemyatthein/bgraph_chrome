@@ -11,10 +11,21 @@ bgraph.bg_page = {
     },
 
     data: {
-        stack     : {},
-        origin    : {},
-        page_info : {},
-        edge      : {}
+        concept_name : undefined,
+        stack        : {},
+        origin       : {},
+        page_info    : {},
+        edge         : {}
+    },
+
+    endConcept: function() {
+        this.data = {
+            concept_name : undefined,
+            stack        : {},
+            origin       : {},
+            page_info    : {},
+            edge         : {}
+        };
     },
 
     // Add provide tab into tab stack and add edge if the stack has more than 1 items.
@@ -77,8 +88,9 @@ chrome.tabs.onCreated.addListener(function(tab) {
 // 
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)  { 
 
+    var objref = bgraph.bg_page;
+
     if (message.type === "page_info") {
-        var objref = bgraph.bg_page;
         
         // Save tab information and page information
         objref.saveTabStack(sender.tab);
@@ -98,6 +110,12 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)  {
                 target_tab_id   : sender.tab.id
             };
         }
+    }
+    else if (message.type === "new_concept") {
+        objref.data.concept_name = message.name;
+    }
+    else if (message.type === "end_concept") {
+        objref.endConcept();
     }
 });
 
