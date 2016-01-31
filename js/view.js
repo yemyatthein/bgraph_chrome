@@ -76,9 +76,10 @@ ymt.view = {
                                 div.setAttributeNode(attr);
                                 
                                 div.innerHTML = "<div class=\"row\"><div class=\"col-md-1\" style=\"padding-left:5px; " + 
-                                                "padding-right:0px; padding-top:0px;\"><img src=\"" + (objref.page_info[url].favicon) + 
-                                                "\" width=\"16px\" height=\"16px\" /></div><div class=\"col-md-11\" style=\"padding-left:" + 
-                                                "0px; padding-right:0px;\"><a href=\"#\">" + (objref.page_info[url].page_title || url) + 
+                                                "padding-right:0px; padding-top:0px;\"><img src=\"" + 
+                                                (objref.page_info[url].favicon) + "\" width=\"16px\" height=\"16px\" />" + 
+                                                "</div><div class=\"col-md-11\" style=\"padding-left:0px; padding-right:" + 
+                                                "0px;\"><a href=\"#\">" + (objref.page_info[url].page_title || url) + 
                                                 "</a></div></div>";
                                 
                                 incoming.appendChild(div);
@@ -93,16 +94,19 @@ ymt.view = {
                             attr.value = "container rel_link_container";
                             div.setAttributeNode(attr);
                             
-                            div.innerHTML = "<div class=\"row\"><div class=\"col-md-1\" style=\"padding-left:5px; padding-right:0px; " + 
-                                            "padding-top:0px;\"><img src=\"" + (objref.page_info[url].favicon) + "\" width=\"16px\" height=" + 
-                                            "\"16px\" /></div><div class=\"col-md-11\" style=\"padding-left:0px; padding-right:0px;\"><a " + 
-                                            "href=\"#\">" + (objref.page_info[url].page_title || url) + "</a></div></div>";
+                            div.innerHTML = "<div class=\"row\"><div class=\"col-md-1\" style=\"padding-left:5px; " + 
+                                            "padding-right:0px; padding-top:0px;\"><img src=\"" + (objref.page_info[url].favicon) + 
+                                            "\" width=\"16px\" height=\"16px\" /></div><div class=\"col-md-11\" style=\"" + 
+                                            "padding-left:0px; padding-right:0px;\"><a href=\"#\">" + 
+                                            (objref.page_info[url].page_title || url) + "</a></div></div>";
                             
                             outgoing.appendChild(div);
                         });
 
                         // No incoming or just a root as incoming node, thus hide the incoming links section
-                        if ((e.incoming.length == 0) || (e.incoming.length == 1 && e.incoming[0] === ymt.view.constants.CHROME_NEWTAB)) {
+                        if ((e.incoming.length == 0) || (e.incoming.length == 1 && 
+                            e.incoming[0] === ymt.view.constants.CHROME_NEWTAB)) {
+                            
                             incoming_container.style.display = "none";
                         }
 
