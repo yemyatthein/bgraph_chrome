@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+	<link href="../styles/vendors/vis.css" rel="stylesheet" type="text/css"/>
+	<link href="../styles/view.css" rel="stylesheet" type="text/css"/>
+
+	<script type="text/javascript" src="../js/vendors/jquery.min.js"></script>
+	<script src="../js/vendors/masonry.pkgd.js"></script>
+	<script type="text/javascript" src="../js/view_save.js"></script>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<h2 class="current_concept_title">Concept Title</h2>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container container_content_part">
+	    <div class="row">
+	        <div class="bscol_veritcal_navbar col-md-2">
+	            <ul class="vertical_navbar nav nav-pills nav-stacked">
+	               <li><a href="view.html">Browsing Graph</a></li>
+	               <li><a href="view_list.html">Resource List</a></li>
+	               <li><a class="active" href="view_save.html">Save Concept</a></li>
+	            </ul>
+	        </div>
+	        <div class="bscol_main_content_holder col-md-10">
+	            <div class="col-md-8">
+	            	<div id="mynetwork" class="left_holder">
+	            		
+	            		<div class="save_bgraph_form_container" style="padding-left:10px; color:#585858;">
+	            			<h3>Save this concept in cloud</h3>
+	            			<div>
+		            			<div style="border-top:1px solid #ccc; border-bottom:1px solid #ccc; width:430px; padding-top:10px; padding-bottom:10px; margin-top:25px;">
+			            			<table style="width:100%;">
+			            				<tr>
+			            					<td style="width:130px;">Concept Name:</td>
+			            					<td>
+			            						<div style="padding-top:4px; padding-bottom:4px;">
+			            							<input style="width:300px; border:1px solid #ccc; border:1px solid #ccc;" type="text" id="xxx" >
+			            						</div>
+			            					</td>
+			            				</tr>
+			            				<tr>
+			            					<td style="width:130px; vertical-align:top;">Description:</td>
+			            					<td>
+			            						<div style="padding-top:4px; padding-bottom:4px;">
+			            							<textarea style="width:300px; max-width:300px; border:1px solid #ccc;"></textarea>
+			            						</div>
+			            					</td>
+			            				</tr>
+			            				<tr>
+			            					<td style="width:130px;">Tags:</td>
+			            					<td>
+			            						<div style="padding-top:4px; padding-bottom:4px;">
+			            							<input style="width:300px; border:1px solid #ccc;" type="text" id="xxx" >
+			            						</div>
+			            					</td>
+			            				</tr>
+			            				<tr>
+			            					<td style="width:130px;">Visible:</td>
+			            					<td>
+			            						<div style="padding-top:4px; padding-bottom:4px;">
+			            							<input type="radio" name="visible" checked id="visible" > Private
+			            							&nbsp;&nbsp;&nbsp;
+			            							<input type="radio" name="visible" id="visible" > Public
+			            						</div>
+			            					</td>
+			            				</tr>
+			            			</table>
+		            			</div>
+
+		            			<div style="margin-top:15px; width:430px; text-align:left">
+        							<button class="btn btn-primary">Save</button>
+        						</div>
+
+		            		</div>
+	            		</div>
+
+	                </div>
+	            </div>
+	            <div class="bscol_url_summary_holder col-md-4">
+	                
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+</body>
+
+</html>

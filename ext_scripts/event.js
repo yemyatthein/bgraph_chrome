@@ -18,11 +18,15 @@ bgraph.bg_page = {
         edge         : {}
     },
 
+    refined_data: undefined,
+
     checkValid: function() {
         return (this.data.concept_name !== undefined);
     },
 
     endConcept: function() {
+        console.log("DEBUG: Concept (" + this.data.concept_name+ ") ended.");
+
         this.data = {
             concept_name : undefined,
             stack        : {},
@@ -75,6 +79,10 @@ chrome.tabs.onCreated.addListener(function(tab) {
 
     var objref = bgraph.bg_page;
 
+    if (!objref.checkValid()) {
+        return;
+    }
+
     // Save new tab to tab stack
     bgraph.bg_page.saveTabStack(tab);
 
@@ -93,6 +101,10 @@ chrome.tabs.onCreated.addListener(function(tab) {
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)  { 
 
     var objref = bgraph.bg_page;
+
+    if (!objref.checkValid() && message.type !== "new_concept") {
+        return;
+    }
 
     if (message.type === "page_info") {
         
@@ -116,10 +128,15 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)  {
         }
     }
     else if (message.type === "new_concept") {
+        console.log("DEBUG: New concept is defined as " + message.name + ".");
         objref.data.concept_name = message.name;
     }
     else if (message.type === "end_concept") {
         objref.endConcept();
+    }
+    else if (message.type === "graph_constructed") {
+        console.log("DEBUG: Graph is constructed.");
+        objref.refined_data = message.data;
     }
 });
 
@@ -132,9 +149,13 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)  {
 // 
 chrome.tabs.onReplaced.addListener(function(new_tab_id, old_tab_id) {
 
-    console.log("DEBUG: Tab " + old_tab_id + " is relaced by " + new_tab_id + ".");
-
     var objref = bgraph.bg_page;
+
+    if (!objref.checkValid()) {
+        return;
+    }
+
+    console.log("DEBUG: Tab " + old_tab_id + " is relaced by " + new_tab_id + ".");
 
     // If tab is a replaced one, put an indicator for later retrieval,
     // Add an edge between the indicator and first link in the tab stack

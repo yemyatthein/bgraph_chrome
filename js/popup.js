@@ -13,6 +13,11 @@ ymt.popup = {
 
         chrome.tabs.create(
             {url: chrome.extension.getURL("pages/view.html")})
+    },
+
+    save_bgraph: function(data) {
+        chrome.tabs.create(
+            {url: chrome.extension.getURL("pages/view_save.html")})  
     }
 }
 
@@ -35,13 +40,13 @@ window.addEventListener('DOMContentLoaded', function(evt) {
             $("#unsaved_warning").show();
         });
 
-        $(document).click(function(e) {
-            if( e.target.id !== 'unsaved_warning' && e.target.id !== "end_bgraph" && 
-                e.target.id !== "unsaved_end_proceed" && e.target.id !== "new_bgraph" &&
-                e.target.id !== "warning_content_container") {
+        $(".save_bgraph").click(function() {
+            var form_data = {};
+            ymt.popup.save_bgraph(form_data);
+        });
 
-                $("#unsaved_warning").hide();
-            }
+        $("#close_warning_btn").click(function(e) {
+            $("#unsaved_warning").hide();
         });
 
         $("#unsaved_end_proceed").click(function() {

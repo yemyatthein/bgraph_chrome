@@ -47,8 +47,12 @@ window.addEventListener('DOMContentLoaded', function(evt) {
                 .css("width", original_width);
         }
     });
-    
+
     chrome.runtime.getBackgroundPage(function(eventPage) {
+
+        // Set current concept name
+        var concept_name = eventPage.bgraph.bg_page.data.concept_name;
+        $(".current_concept_title").text(concept_name);
         
         // Constants for node types in vis js
         var NODE_TYPE = "image";
@@ -117,27 +121,27 @@ window.addEventListener('DOMContentLoaded', function(evt) {
 
         });
 
-    var gitems = document.getElementsByClassName("grid-item");
-    var selected = undefined;
+        var gitems = document.getElementsByClassName("grid-item");
+        var selected = undefined;
 
-    for (var i=0; i < gitems.length; i++) {
-        gitems[i].onclick = function(evt){
-             var page = ds_page_info[this.getAttribute("url_data")];
+        for (var i=0; i < gitems.length; i++) {
+            gitems[i].onclick = function(evt){
+                 var page = ds_page_info[this.getAttribute("url_data")];
 
-             if (selected) {
-                selected.style.background = "#fff";
-             }
-             selected = this;
-             this.style.background = "#99c2ff";
+                 if (selected) {
+                    selected.style.background = "#fff";
+                 }
+                 selected = this;
+                 this.style.background = "#99c2ff";
 
-             document.getElementById("no_summary_info_container").style.display = "none";
-             document.getElementById("url_summary_table").style.display = null;
-             
-             document.getElementById("main_url_image").setAttribute("src", page.image);
-             document.getElementById("main_url_title").innerHTML = "<a href=\"#\">" + page.page_title + "</a>";
-             document.getElementById("main_url_description").innerHTML = page.description;
-        };
-    }
+                 document.getElementById("no_summary_info_container").style.display = "none";
+                 document.getElementById("url_summary_table").style.display = null;
+                 
+                 document.getElementById("main_url_image").setAttribute("src", page.image);
+                 document.getElementById("main_url_title").innerHTML = "<a href=\"#\">" + page.page_title + "</a>";
+                 document.getElementById("main_url_description").innerHTML = page.description;
+            };
+        }
 
     });
     

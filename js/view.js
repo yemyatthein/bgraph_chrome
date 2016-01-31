@@ -159,6 +159,10 @@ window.addEventListener('DOMContentLoaded', function(evt) {
     var edges_hash = {};
     
     chrome.runtime.getBackgroundPage(function(eventPage) {
+
+        // Set current concept name
+        var concept_name = eventPage.bgraph.bg_page.data.concept_name;
+        $(".current_concept_title").text(concept_name);
         
         // Constants for node types in vis js
         var NODE_TYPE = "image";
@@ -436,6 +440,14 @@ window.addEventListener('DOMContentLoaded', function(evt) {
 
         }
 
+        // Save constructed data in background page
+        chrome.runtime.sendMessage({
+            type : "graph_constructed",
+            data : {
+                nodes : nodes,
+                edges : edges
+            }
+        });
 
         // Call render function
         ymt.view.renderGraph(nodes, edges);
