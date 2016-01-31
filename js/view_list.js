@@ -85,12 +85,15 @@ window.addEventListener('DOMContentLoaded', function(evt) {
             div.setAttributeNode(attr_url);
             //div.setAttributeNode(attr_onclick);
             
-            var image = ds_page_info[k].image; //"http://static.goal.com/2545400/2545482_heroa.jpg";
-            var title = ds_page_info[k].page_title; //"No Nolito or new Neymar deal yet - the price of paying the MSN for Barcelona - Goal.com";
+            var image = ds_page_info[k].image;
+            var title = ds_page_info[k].page_title;
 
-            div.innerHTML = "<img src=\"" + image + "\" width=\"100%\"/><div><span style=\"font-size:12px;\">" + title + "</span></div>";
+            div.innerHTML = "<img src=\"" + image + "\" width=\"100%\"/><div><span style=\"font-size:12px;\">" + 
+                            title + "</span></div>";
             
-            res_list.appendChild(div);
+            if (title) {
+                res_list.appendChild(div);
+            }
 
             if (ki == Object.keys(ds_page_info).length-1) {
                 setTimeout(function() {
@@ -101,8 +104,6 @@ window.addEventListener('DOMContentLoaded', function(evt) {
                       columnWidth: 200
                     });
 
-                    // element argument can be a selector string
-                    //   for an individual element
                     var msnry = new Masonry( '.grid', {
                       // options
                     });
