@@ -29,6 +29,24 @@ window.addEventListener('DOMContentLoaded', function(evt) {
 
     var nodes_hash = {};
     var edges_hash = {};
+
+    var stickyTop      = $('.sticky').offset().top;
+    var original_width = $('.sticky').outerWidth();
+
+    console.log(original_width);
+
+    $(window).scroll(function(){
+        var windowTop = $(window).scrollTop();
+        if (stickyTop < windowTop) {
+            $('.sticky')
+                .css({ position: 'fixed', top: 0 });
+        }
+        else {
+            $('.sticky')
+                .css('position','static')
+                .css("width", original_width);
+        }
+    });
     
     chrome.runtime.getBackgroundPage(function(eventPage) {
         
