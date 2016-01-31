@@ -95,10 +95,11 @@ ymt.view = {
                             div.setAttributeNode(attr);
                             
                             div.innerHTML = "<div class=\"row\"><div class=\"col-md-1\" style=\"padding-left:5px; " + 
-                                            "padding-right:0px; padding-top:0px;\"><img src=\"" + (objref.page_info[url].favicon) + 
-                                            "\" width=\"16px\" height=\"16px\" /></div><div class=\"col-md-11\" style=\"" + 
-                                            "padding-left:0px; padding-right:0px;\"><a href=\"#\">" + 
-                                            (objref.page_info[url].page_title || url) + "</a></div></div>";
+                                            "padding-right:0px; padding-top:0px;\"><img src=\"" + 
+                                            (objref.page_info[url].favicon) + "\" width=\"16px\" height=\"16px\" />" + 
+                                            "</div><div class=\"col-md-11\" style=\"padding-left:0px; padding-right:" + 
+                                            "0px;\"><a href=\"#\">" + (objref.page_info[url].page_title || url) + 
+                                            "</a></div></div>";
                             
                             outgoing.appendChild(div);
                         });
