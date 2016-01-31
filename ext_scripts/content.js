@@ -60,6 +60,7 @@ console.log("Finally, Favicon is ", favicon);
 
 // Now send page information to background page
 chrome.runtime.sendMessage({
+    type          : "page_info",
     page_url      : document.location.href,
     page_title    : document.title,
     description   : description,

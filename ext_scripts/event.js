@@ -1,10 +1,8 @@
 var bgraph = bgraph || {};
 
+
 bgraph.bg_page = {
 
-    // Whether to save tab/url informations when an event occurs
-    record_switch: true,
-    
     NS: {
         TAB_STACK  : "tab_stack___",
         TAB_ORIGIN : "tab_origin___",
@@ -19,6 +17,9 @@ bgraph.bg_page = {
         edge      : {}
     },
 
+    // Add provide tab into tab stack and add edge if the stack has more than 1 items.
+    // If tab is already been captured recently, ignore it.
+    // 
     saveTabStack: function(tab) {
         var tab_stack = [];
         if (this.data.stack[this.NS.TAB_STACK + tab.id] !== undefined) {
@@ -51,34 +52,32 @@ bgraph.bg_page = {
     }
 };
 
-// When a tab is created
-chrome.tabs.onCreated.addListener(function(tab) {
 
-    if (!bgraph.bg_page.record_switch) {
-        return;
-    }
+// When a tab is created, save the tab into tab stack. Record current active tab in tab origin.
+// This is to get where a tab is created from. (e.g. "Open in a New Tab" case)
+// 
+chrome.tabs.onCreated.addListener(function(tab) {
 
     var objref = bgraph.bg_page;
 
     // Save new tab to tab stack
     bgraph.bg_page.saveTabStack(tab);
 
-    // Save current active tab quickly, as an origin of the newly created tab,
+    // Save current  active tab quickly, as an origin of the newly created tab,
     // It may be the same tab or a different one
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, function (tabs) {
         objref.data.origin[objref.NS.TAB_ORIGIN + tab.id] = tabs[0];
     });
 });
 
-// When content script sends a message after page load
+
+// When content script sends a message after page load (type="page_info"), save page information
+// add sender tab in tab stack. If the sender has origin tab, add an edge between origin's url
+// and sender url. ("Open in a New Tab" case)
+// 
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)  { 
 
-    if (message.from === "popup" && message === "record_toggle") {
-        bgraph.bg_page.record_switch = message.toggle;
-    } else {
-        if (!bgraph.bg_page.record_switch) {
-            return;
-        }
+    if (message.type === "page_info") {
         var objref = bgraph.bg_page;
         
         // Save tab information and page information
@@ -102,13 +101,15 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)  {
     }
 });
 
-// When a tab is replaced internally by Chrome
+
+// When a tab is replaced internally by Chrome, new tab is added to tab stack.
+// A new special identifier "___relaced___<id>" is added at front of the tab 
+// stack for refering back to old tab. The id is the old tab's identity.
+// Since new tab is saved here, add an edge as well if the tab stack has more 
+// than one items.
+// 
 chrome.tabs.onReplaced.addListener(function(new_tab_id, old_tab_id) {
 
-    if (!bgraph.bg_page.record_switch) {
-        return;
-    }
-    
     var objref = bgraph.bg_page;
 
     // If tab is a replaced one, put an indicator for later retrieval,
