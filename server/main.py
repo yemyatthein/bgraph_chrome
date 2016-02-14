@@ -1,4 +1,5 @@
 import json
+import base64
 from flask import (Flask, request, make_response, jsonify, 
                    redirect, render_template, url_for)
 from uuid import uuid1
@@ -31,7 +32,8 @@ def view(uid):
     data = col_concepts.find_one({'id': uid})
 
     return render_template('views/view.html', data=data, 
-                           original=json.dumps(data['original']))
+                           original=base64.b64encode(json.dumps(data['original'])),
+                           refined=base64.b64encode(json.dumps(data['refined'])))
 
 @app.route('/all_concepts', methods=['GET'])
 def all_concepts():
