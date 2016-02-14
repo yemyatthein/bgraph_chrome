@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+	<link href="../styles/vendors/vis.css" rel="stylesheet" type="text/css"/>
+	<link href="../styles/view.css" rel="stylesheet" type="text/css"/>
+
+	<script type="text/javascript" src="../js/vendors/jquery.min.js"></script>
+	<script src="../js/vendors/masonry.pkgd.js"></script>
+	<script type="text/javascript" src="../js/view_list.js"></script>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-inverse navbar-static-top">
+		<div class="container-fluid">
+			<div class="navbar-header" style="width:100%;">
+				
+				<table style="width:100%;">
+					<tr>
+						<td>
+							<h2 class="current_concept_title">Concept Title</h2>
+						</td>
+						<td style="text-align:right">
+
+							<form class="navbar-form navbar-left" role="search" style="width:100%;">
+							    <div class="form-group">
+							        <input type="text" class="form-control" style="width:200px;" placeholder="Search">
+							    </div>
+							    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+							</form>
+
+						</td>
+					</tr>
+				</table>
+
+			</div>
+		</div>
+	</nav>
+
+	<div class="container container_content_part"> <div class="row"> <div class="bscol_veritcal_navbar col-md-2"> <ul class="vertical_navbar nav nav-pills nav-stacked">
+	               <li><a href="view.html">Browsing Graph</a></li>
+	               <li><a class="active" href="view_list.html">Resource List</a></li>
+	               <li><a href="view_save.html">Save Concept</a></li>
+	            </ul>
+	        </div>
+	        <div class="bscol_main_content_holder col-md-10">
+	            <div class="col-md-8">
+	            	<div id="mynetwork" class="left_holder" style="min-height:450px;">
+	            		<div class="loading_icon_container">
+		            		<img src="https://mmstatic.thcdn.com/4.00.27.9059/img/ajax-loader7.gif" width="30px">
+		            		<span>Loading the resource list</span>
+		            	</div>
+
+	                	<div class="grid" id="res_list">
+						</div>
+	                </div>
+	            </div>
+	            <div class="bscol_url_summary_holder col-md-4">
+	                
+	                <div class="sticky">
+		                <div class="url_summary_container" style="width:100%">
+		                	<div id="no_summary_info_container" class="alert alert-success">Click on a node for summary</div>
+			                <table id="url_summary_table" class="url_summary_table" border="0" style="display:none;">
+			                    <tr>
+			                        <td class="url_summary_img_td">
+			                            <div>
+											<img src="http://hdwallpaperslovely.com/wp-content/gallery/ziggy-cartoon-pictures/Ziggy-Stardust-ziggy-stardust-9109824-842-1191.jpg" id="main_url_image" align="left" />
+											<div><b>
+								                <span id="main_url_title">
+								                    <a href="#">Title Here</a>
+								                </span>
+								            </b></div>
+								            <div id="main_url_description" class="url_summary_text_content">
+												Description Text Here
+											</div>
+										</div>
+			                        </td>
+			                    </tr>
+			                </table>
+		                </div>
+
+		                <hr/>
+
+		                <div id="main_url_incoming_container" style="display:none;">
+			                <div><b>Incoming links</b></div>
+			                <div id="main_url_incoming"></div>
+		            	</div>
+
+		            	<div id="main_url_outgoing_container" style="display:none;">
+		                	<div><b>Outgoing links</b></div>
+		                	<div id="main_url_outgoing"> </div>
+		                </div>
+		            </div>
+
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+</body>
+
+</html>

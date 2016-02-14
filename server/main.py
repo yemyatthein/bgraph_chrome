@@ -35,6 +35,16 @@ def view(uid):
                            original=base64.b64encode(json.dumps(data['original'])),
                            refined=base64.b64encode(json.dumps(data['refined'])))
 
+
+@app.route('/view_list/<uid>', methods=['GET'])
+def viewList(uid):
+    data = col_concepts.find_one({'id': uid})
+
+    return render_template('views/view_list.html', data=data, 
+                           original=base64.b64encode(json.dumps(data['original'])),
+                           refined=base64.b64encode(json.dumps(data['refined'])))
+
+
 @app.route('/all_concepts', methods=['GET'])
 def all_concepts():
     data = []
