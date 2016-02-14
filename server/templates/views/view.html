@@ -46,9 +46,8 @@
 	    <div class="row">
 	        <div class="bscol_veritcal_navbar col-md-2">
 	            <ul class="vertical_navbar nav nav-pills nav-stacked">
-	               <li><a class="active" href="view.html">Browsing Graph</a></li>
-	               <li><a href="view_list.html">Resource List</a></li>
-	               <li><a href="view_save.html">Save Concept</a></li>
+	               <li><a class="active" href="{{ url_for('view', uid=data['id']) }}">Browsing Graph</a></li>
+	               <li><a href="{{ url_for('viewList', uid=data['id']) }}">Resource List</a></li>
 	            </ul>
 	        </div>
 

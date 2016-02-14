@@ -3,6 +3,9 @@
 
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/vendors/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/all_concepts.js') }}"></script>
 </head>
 
 <body>
@@ -36,7 +39,7 @@
     <div style="text-align:left;">
     
         {% for concept_data in data %}
-            <div style="cursor:pointer; background:#EFF5FB; text-align:left; display:inline-block; margin:10px; border:1px solid #ccc; padding:15px; padding-top:0px; padding-bottom:0px; min-height:225px; vertical-align:bottom;">
+            <div class="concept_container" data-id="{{ concept_data['id'] }}" style="cursor:pointer; background:#EFF5FB; text-align:left; display:inline-block; margin:10px; border:1px solid #ccc; padding:15px; padding-top:0px; padding-bottom:0px; min-height:225px; vertical-align:bottom;">
                 <h3>{{ concept_data['concept']['name'] }}:</h3> 
 
                 

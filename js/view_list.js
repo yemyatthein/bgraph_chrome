@@ -129,24 +129,24 @@ window.addEventListener('DOMContentLoaded', function(evt) {
 
         for (var i=0; i < gitems.length; i++) {
             gitems[i].onclick = function(evt){
-            var page = ds_page_info[this.getAttribute("url_data")];
+                var page = ds_page_info[this.getAttribute("url_data")];
 
-            if (selected) {
-                selected.style.background = "#fff";
-            }
-            selected = this;
-            this.style.background = "#99c2ff";
+                if (selected) {
+                    selected.style.background = "#fff";
+                }
+                selected = this;
+                this.style.background = "#99c2ff";
 
-            document.getElementById("no_summary_info_container").style.display = "none";
-            document.getElementById("url_summary_table").style.display = null;
+                document.getElementById("no_summary_info_container").style.display = "none";
+                document.getElementById("url_summary_table").style.display = null;
 
-            document.getElementById("main_url_image").setAttribute("src", page.image);
-            document.getElementById("main_url_title").innerHTML = "<a href=\"#\">" + page.page_title + "</a>";
-            document.getElementById("main_url_description").innerHTML = page.description;
+                document.getElementById("main_url_image").setAttribute("src", page.image);
+                document.getElementById("main_url_title").innerHTML = "<a href=\"#\">" + page.page_title + "</a>";
+                document.getElementById("main_url_description").innerHTML = page.description;
 
-            // Incoming and outgoing links
+                // Incoming and outgoing links
 
-            var incoming = document.getElementById("main_url_incoming");
+                var incoming = document.getElementById("main_url_incoming");
                 var outgoing = document.getElementById("main_url_outgoing");
 
                 var incoming_container = document.getElementById("main_url_incoming_container");

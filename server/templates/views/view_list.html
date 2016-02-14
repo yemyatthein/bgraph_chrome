@@ -3,15 +3,18 @@
 
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
-	<link href="../styles/vendors/vis.css" rel="stylesheet" type="text/css"/>
-	<link href="../styles/view.css" rel="stylesheet" type="text/css"/>
+	<link href="{{ url_for('static', filename='styles/vendors/vis.css') }}" rel="stylesheet" type="text/css"/>
+	<link href="{{ url_for('static', filename='styles/view.css') }}" rel="stylesheet" type="text/css"/>
 
-	<script type="text/javascript" src="../js/vendors/jquery.min.js"></script>
-	<script src="../js/vendors/masonry.pkgd.js"></script>
-	<script type="text/javascript" src="../js/view_list.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/vendors/jquery.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/vendors/masonry.pkgd.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/view_list_serverside.js') }}"></script>
 </head>
 
 <body>
+
+	<input type="hidden" value="{{ original }}" id="data_original" />
+	<input type="hidden" value="{{ refined }}" id="data_refined" />
 
 	<nav class="navbar navbar-inverse navbar-static-top">
 		<div class="container-fluid">
@@ -40,9 +43,8 @@
 	</nav>
 
 	<div class="container container_content_part"> <div class="row"> <div class="bscol_veritcal_navbar col-md-2"> <ul class="vertical_navbar nav nav-pills nav-stacked">
-	               <li><a href="view.html">Browsing Graph</a></li>
-	               <li><a class="active" href="view_list.html">Resource List</a></li>
-	               <li><a href="view_save.html">Save Concept</a></li>
+	               <li><a class="active" href="{{ url_for('view', uid=data['id']) }}">Browsing Graph</a></li>
+	               <li><a href="{{ url_for('viewList', uid=data['id']) }}">Resource List</a></li>
 	            </ul>
 	        </div>
 	        <div class="bscol_main_content_holder col-md-10">
