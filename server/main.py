@@ -1,5 +1,6 @@
 import json
-from flask import (Flask, request, make_response, jsonify, redirect, render_template)
+from flask import (Flask, request, make_response, jsonify, 
+                   redirect, render_template, url_for)
 from uuid import uuid1
 from pymongo import MongoClient
 
@@ -28,8 +29,9 @@ def save():
 @app.route('/view/<uid>', methods=['GET'])
 def view(uid):
     data = col_concepts.find_one({'id': uid})
-    data.pop('_id')
-    return jsonify({'data': data})
+
+    return render_template('views/view.html', data=data, 
+                           original=json.dumps(data['original']))
 
 @app.route('/all_concepts', methods=['GET'])
 def all_concepts():

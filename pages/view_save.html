@@ -66,7 +66,7 @@
 			            					<td style="width:130px;">Concept Name:</td>
 			            					<td>
 			            						<div style="padding-top:4px; padding-bottom:4px;">
-			            							<input style="width:300px; border:1px solid #ccc; border:1px solid #ccc;" type="text" id="xxx" >
+			            							<input style="width:300px; border:1px solid #ccc; border:1px solid #ccc;" type="text" id="save_concept_name" disabled >
 			            						</div>
 			            					</td>
 			            				</tr>
@@ -74,7 +74,7 @@
 			            					<td style="width:130px; vertical-align:top;">Description:</td>
 			            					<td>
 			            						<div style="padding-top:4px; padding-bottom:4px;">
-			            							<textarea style="width:300px; max-width:300px; border:1px solid #ccc;"></textarea>
+			            							<textarea style="width:300px; max-width:300px; border:1px solid #ccc;" id="save_concept_description"></textarea>
 			            						</div>
 			            					</td>
 			            				</tr>
@@ -82,7 +82,7 @@
 			            					<td style="width:130px;">Tags:</td>
 			            					<td>
 			            						<div style="padding-top:4px; padding-bottom:4px;">
-			            							<input style="width:300px; border:1px solid #ccc;" type="text" id="xxx" >
+			            							<input style="width:300px; border:1px solid #ccc;" type="text" id="save_concept_tags" >
 			            						</div>
 			            					</td>
 			            				</tr>
@@ -90,9 +90,9 @@
 			            					<td style="width:130px;">Visible:</td>
 			            					<td>
 			            						<div style="padding-top:4px; padding-bottom:4px;">
-			            							<input type="radio" name="visible" checked id="visible" > Private
+			            							<input type="radio" checked name="save_concept_visible" value="PRIVATE"> Private
 			            							&nbsp;&nbsp;&nbsp;
-			            							<input type="radio" name="visible" id="visible" > Public
+			            							<input type="radio" name="save_concept_visible" value="PUBLIC"> Public
 			            						</div>
 			            					</td>
 			            				</tr>

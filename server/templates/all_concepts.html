@@ -33,13 +33,20 @@
         </div>
     </nav>
 
-    <div style="text-align:center;">
+    <div style="text-align:left;">
+    
         {% for concept_data in data %}
-            <div style="cursor:pointer; background:#E0ECF8; text-align:left; display:inline-block; margin:10px; border:1px solid #ccc; padding:15px; padding-top:0px; padding-bottom:0px;">
+            <div style="cursor:pointer; background:#EFF5FB; text-align:left; display:inline-block; margin:10px; border:1px solid #ccc; padding:15px; padding-top:0px; padding-bottom:0px; min-height:225px; vertical-align:bottom;">
                 <h3>{{ concept_data['concept']['name'] }}:</h3> 
 
-                <div style="color:#585858">
-                    {{ concept_data['concept']['description'] }}
+                
+                <div style="color:#585858" title="{{ concept_data['concept']['description'] }}">
+                    {{ concept_data['concept']['description'][:70] }}
+
+                    {% if ((concept_data['concept']['description']|count) > 70)  %}
+                        ...
+                    {%endif%}
+
                 </div>
 
                 <div style="margin-top:15px;">
@@ -52,8 +59,6 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-
-                <hr/>
 
             </div>
         {% endfor %}

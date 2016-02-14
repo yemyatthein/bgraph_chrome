@@ -10,6 +10,9 @@ window.addEventListener('DOMContentLoaded', function(evt) {
     
     chrome.runtime.getBackgroundPage(function(eventPage) {
 
+        var concept_name = eventPage.bgraph.bg_page.data.concept_name;
+        $("#save_concept_name").val(concept_name);
+
         // Set current concept name
         var concept_name = eventPage.bgraph.bg_page.data.concept_name;
         $(".current_concept_title").text(concept_name);
@@ -18,11 +21,11 @@ window.addEventListener('DOMContentLoaded', function(evt) {
 			var original_data = eventPage.bgraph.bg_page.data;
 			var refined_data  = eventPage.bgraph.bg_page.refined_data;
 
-			var concept_data = {
-				name 		: "Popular Stuffs",
-				description	: "It's about the popular news searching and reading.",
-				tags		: "news gadget juzforlolz",
-				visibility	: "PUBLIC"
+            var concept_data = {
+				name 		: $("#save_concept_name").val(),
+				description	: $("#save_concept_description").val(),
+				tags		: $("#save_concept_tags").val(),
+				visibility	: $("input[name=save_concept_visible]:checked").val()
 			};
 
 			var form_data = {
