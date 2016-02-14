@@ -1,30 +1,44 @@
 import json
-from flask import (Flask, request, make_response, jsonify, redirect)
+from flask import (Flask, request, make_response, jsonify, redirect, render_template)
+from uuid import uuid1
+from pymongo import MongoClient
 
 
 app = Flask(__name__)
 
-
-@app.route('/sample')
-def index():
-	data = {"response_data": [
-		{'name': 'Pop', 'age': 12, 'school': 'James Wood High'},
-		{'name': 'Kilo', 'age': 12, 'school': 'James Wood High'},
-		{'name': 'Mondy', 'age': 7, 'school': 'Darrern Loo Junior'},
-	]}
-	return jsonify(data)
+client       = MongoClient()
+db           = client.bgraph_db
+col_concepts = db.concepts
 
 
-@app.route('/save', methods=["POST"])
+@app.route('/save', methods=['POST'])
 def save():
-	data = {
-		'concept': json.loads(request.form['concept']),
-		'original': json.loads(request.form['original']),
-		'refined': json.loads(request.form['refined']),
-	}
+    concept = {
+        'id'        : str(uuid1()),
+        'concept'   : json.loads(request.form['concept']),
+        'original'  : json.loads(request.form['original']),
+        'refined'   : json.loads(request.form['refined']),
+    }
 
-	return jsonify({'response': data})
+    col_concepts.insert(concept, check_keys=False)
+
+    return jsonify({'concept_id': concept['id']})
+
+
+@app.route('/view/<uid>', methods=['GET'])
+def view(uid):
+    data = col_concepts.find_one({'id': uid})
+    data.pop('_id')
+    return jsonify({'data': data})
+
+@app.route('/all_concepts', methods=['GET'])
+def all_concepts():
+    data = []
+    for concept in col_concepts.find():
+        data.append(concept)
+
+    return render_template('all_concepts.html', data=data)
 
 
 if __name__ == '__main__':
-	app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0')

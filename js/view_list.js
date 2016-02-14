@@ -53,6 +53,8 @@ window.addEventListener('DOMContentLoaded', function(evt) {
         // Set current concept name
         var concept_name = eventPage.bgraph.bg_page.data.concept_name;
         $(".current_concept_title").text(concept_name);
+
+        var edge_data = eventPage.bgraph.bg_page.refined_data.edge_data;
         
         // Constants for node types in vis js
         var NODE_TYPE = "image";
@@ -127,20 +129,91 @@ window.addEventListener('DOMContentLoaded', function(evt) {
 
         for (var i=0; i < gitems.length; i++) {
             gitems[i].onclick = function(evt){
-                 var page = ds_page_info[this.getAttribute("url_data")];
+            var page = ds_page_info[this.getAttribute("url_data")];
 
-                 if (selected) {
-                    selected.style.background = "#fff";
-                 }
-                 selected = this;
-                 this.style.background = "#99c2ff";
+            if (selected) {
+                selected.style.background = "#fff";
+            }
+            selected = this;
+            this.style.background = "#99c2ff";
 
-                 document.getElementById("no_summary_info_container").style.display = "none";
-                 document.getElementById("url_summary_table").style.display = null;
-                 
-                 document.getElementById("main_url_image").setAttribute("src", page.image);
-                 document.getElementById("main_url_title").innerHTML = "<a href=\"#\">" + page.page_title + "</a>";
-                 document.getElementById("main_url_description").innerHTML = page.description;
+            document.getElementById("no_summary_info_container").style.display = "none";
+            document.getElementById("url_summary_table").style.display = null;
+
+            document.getElementById("main_url_image").setAttribute("src", page.image);
+            document.getElementById("main_url_title").innerHTML = "<a href=\"#\">" + page.page_title + "</a>";
+            document.getElementById("main_url_description").innerHTML = page.description;
+
+            // Incoming and outgoing links
+
+            var incoming = document.getElementById("main_url_incoming");
+                var outgoing = document.getElementById("main_url_outgoing");
+
+                var incoming_container = document.getElementById("main_url_incoming_container");
+                incoming_container.style.display = null;
+
+                var outgoing_container = document.getElementById("main_url_outgoing_container");
+                outgoing_container.style.display = null;
+
+                incoming.innerHTML = "";
+                outgoing.innerHTML = "";
+
+                var e = edge_data[page.page_url];
+
+                console.log(edge_data);
+
+                if (e) {
+
+                    // Render incoming links
+
+                    e.incoming.forEach(function(url) {
+                        if (url !== ymt.view.constants.CHROME_NEWTAB) {
+                            var div  = document.createElement("div");
+                            var attr = document.createAttribute("class");
+                            attr.value = "container rel_link_container";
+                            div.setAttributeNode(attr);
+                            
+                            div.innerHTML = "<div class=\"row\"><div class=\"col-md-1\" style=\"padding-left:5px; " + 
+                                            "padding-right:0px; padding-top:0px;\"><img src=\"" + 
+                                            (ds_page_info[url].favicon) + "\" width=\"16px\" height=\"16px\" />" + 
+                                            "</div><div class=\"col-md-11\" style=\"padding-left:0px; padding-right:" + 
+                                            "0px;\"><a href=\"#\">" + (ds_page_info[url].page_title || url) + 
+                                            "</a></div></div>";
+                            
+                            incoming.appendChild(div);
+                        }
+                    });
+
+                    // Render outgoing links
+
+                    e.outgoing.forEach(function(url) {
+                        var div  = document.createElement("div");
+                        var attr = document.createAttribute("class");
+                        attr.value = "container rel_link_container";
+                        div.setAttributeNode(attr);
+                        
+                        div.innerHTML = "<div class=\"row\"><div class=\"col-md-1\" style=\"padding-left:5px; " + 
+                                        "padding-right:0px; padding-top:0px;\"><img src=\"" + 
+                                        (ds_page_info[url].favicon) + "\" width=\"16px\" height=\"16px\" />" + 
+                                        "</div><div class=\"col-md-11\" style=\"padding-left:0px; padding-right:" + 
+                                        "0px;\"><a href=\"#\">" + (ds_page_info[url].page_title || url) + 
+                                        "</a></div></div>";
+                        
+                        outgoing.appendChild(div);
+                    });
+
+                    // No incoming or just a root as incoming node, thus hide the incoming links section
+                    if ((e.incoming.length == 0) || (e.incoming.length == 1 && 
+                        e.incoming[0] === ymt.view.constants.CHROME_NEWTAB)) {
+                        
+                        incoming_container.style.display = "none";
+                    }
+
+                    // No outgoing node, thus hide the outgoing links section
+                    if (e.outgoing.length == 0) {
+                        outgoing_container.style.display = "none";
+                    }
+                }
             };
         }
 

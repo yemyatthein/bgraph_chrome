@@ -449,8 +449,9 @@ window.addEventListener('DOMContentLoaded', function(evt) {
         chrome.runtime.sendMessage({
             type : "graph_constructed",
             data : {
-                nodes : nodes,
-                edges : edges
+                nodes     : nodes,
+                edges     : edges,
+                edge_data : ymt.view.edge_data,
             }
         });
 
