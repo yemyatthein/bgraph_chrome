@@ -7,7 +7,20 @@ ymt.save = {
 
 window.addEventListener('DOMContentLoaded', function(evt) {
 
-    
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:5000/is_authenticated",
+        success: function(response) {
+            if (response.user_authenticated === false) {
+                window.open(
+                    "http://localhost:5000/login?referer=" 
+                    + encodeURIComponent(window.location.href),
+                    "_blank");
+            }
+        },
+        dataType: "json"
+    });
+
     chrome.runtime.getBackgroundPage(function(eventPage) {
 
         var concept_name = eventPage.bgraph.bg_page.data.concept_name;

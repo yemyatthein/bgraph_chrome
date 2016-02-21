@@ -1,0 +1,142 @@
+<html>
+<head>
+    <title>Facebook JS Login Test</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+
+    <style type="text/css">
+        .fb_iframe_widget iframe {
+            top: 5px;
+        }
+    </style>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/vendors/jquery.min.js') }}"></script>
+</head>
+
+<body>
+    
+    <script>
+        // This is called with the results from from FB.getLoginStatus().
+        function statusChangeCallback(response) {
+            console.log("statusChangeCallback");
+            console.log(response);
+            // The response object is returned with a status field that lets the
+            // app know the current login status of the person.
+            // Full docs on the response object can be found in the documentation
+            // for FB.getLoginStatus().
+            if (response.status === "connected") {
+                // Logged into your app and Facebook.
+                testAPI();
+            } else if (response.status === "not_authorized") {
+                // The person is logged into Facebook, but not your app.
+                document.getElementById("status").innerHTML = "Please log into this app.";
+            } else {
+                // The person is not logged into Facebook, so we're not sure if
+                // they are logged into this app or not.
+                document.getElementById("status").innerHTML = "Please log into Facebook.";
+            }
+        }
+
+        // This function is called when someone finishes with the Login
+        // Button.  See the onlogin handler attached to it in the sample
+        // code below.
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+        }
+
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : "991523207589607",
+                xfbml      : true,
+                version    : "v2.5",
+                cookie     : true,  // enable cookies to allow the server to access the session
+            });
+
+            // Now that we've initialized the JavaScript SDK, we call 
+            // FB.getLoginStatus().  This function gets the state of the
+            // person visiting this page and can return one of three states to
+            // the callback you provide.  They can be:
+            //
+            // 1. Logged into your app ('connected')
+            // 2. Logged into Facebook, but not your app ('not_authorized')
+            // 3. Not logged into Facebook and can't tell if they are logged into
+            //    your app or not.
+            //
+            // These three cases are handled in the callback function.
+
+            //FB.getLoginStatus(function(response) {
+            //    statusChangeCallback(response);
+            //});
+        };
+
+        // Load the SDK asynchronously
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            
+            if (d.getElementById(id)) {
+                return;
+            }
+            
+            js      = d.createElement(s); 
+            js.id   = id;
+            js.src  = "//connect.facebook.net/en_US/sdk.js";
+            
+            fjs.parentNode.insertBefore(js, fjs);
+
+        }(document, "script", "facebook-jssdk"));
+
+        $.urlParam = function(name){
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            return results[1] || 0;
+        }
+
+        // Here we run a very simple test of the Graph API after login is
+        // successful.  See statusChangeCallback() for when this call is made.
+        function testAPI() {
+            console.log("Welcome!  Fetching your information.... ");
+            FB.api("/me", {fields: "id, name, email"}, function(response) {
+                //console.log("User information:", response);
+                //console.log("Successful login for: " + response.name);
+                //document.getElementById("status").innerHTML = "Thanks //for logging in, " + response.name + "!";
+
+                console.log(response.email, response.id, $.urlParam("referer"));
+                
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:5000/fb_login",
+                    data: {
+                        user_id : JSON.stringify(response.id),
+                        email   : JSON.stringify(response.email),
+                        referer : JSON.stringify($.urlParam("referer"))
+                    },
+                    success: function(response) {
+                        if (response.fb_login_done === true) {
+                            window.close();
+                            //window.location.replace(
+                            //    decodeURIComponent(
+                            //        $.urlParam("referer")));
+                        }
+                    },
+                    dataType: "json"
+                });
+            });
+        }
+    </script>
+
+    
+    <div style="padding:20px; display:inline-block; background:#EFF5FB; margin:10px; border:1px solid #ccc;">
+        
+        <span style="margin-right:10px;">
+            <strong>Log in With Facebook: </strong>
+        </span>
+
+        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+        </fb:login-button>
+    </div>
+    
+    
+
+</body>
+
+</html>
