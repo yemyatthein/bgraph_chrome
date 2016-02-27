@@ -22,7 +22,7 @@ ymt.view = {
         edges = new vis.DataSet(edges);
 
         var objref    = this;
-        var container = document.getElementById('mynetwork');
+        var container = document.getElementById('network-graph');
         
         var options = {};
         var data    = {nodes: nodes, edges: edges};
@@ -38,31 +38,29 @@ ymt.view = {
                 if (p) {
 
                     // Main url info
-                    document.getElementById("main_url_title").innerHTML = "<a href=\"#\">" + p.page_title + "</a>";
-                    document.getElementById("main_url_description").innerHTML = p.description;
-                    document.getElementById("main_url_image").setAttribute("src", p.image);
+                    document.getElementById("main-url-title").innerHTML = "<a href=\"#\">" + p.page_title + "</a>";
+                    document.getElementById("main-url-description-holder").innerHTML = p.description;
+                    document.getElementById("main-url-image").setAttribute("src", p.image);
 
-                    var incoming = document.getElementById("main_url_incoming");
-                    var outgoing = document.getElementById("main_url_outgoing");
+                    var incoming = document.getElementsByClassName("url-incoming-content")[0];
+                    var outgoing = document.getElementsByClassName("url-outgoing-content")[0];
                     
-                    var no_summary_container = document.getElementById("no_summary_info_container");
-                    no_summary_container.style.display = "none";
+                    var no_summary_holder = document.getElementById("no-summary-info-holder");
+                    no_summary_holder.style.display = "none";
 
-                    var summary_container = document.getElementById("url_summary_table");
+                    var summary_container = document.getElementById("url-summary-table");
                     summary_container.style.display = null;
 
-                    var incoming_container = document.getElementById("main_url_incoming_container");
+                    var incoming_container = document.getElementsByClassName("main-url-incoming-holder")[0];
                     incoming_container.style.display = null;
 
-                    var outgoing_container = document.getElementById("main_url_outgoing_container");
+                    var outgoing_container = document.getElementsByClassName("main-url-outgoing-holder")[0];
                     outgoing_container.style.display = null;
                     
                     incoming.innerHTML = "";
                     outgoing.innerHTML = "";
 
                     var e = objref.edge_data[params.nodes[0]];
-
-                    console.log(e, params.nodes[0]);
 
                     if (e) {
 
@@ -72,15 +70,16 @@ ymt.view = {
                             if (url !== ymt.view.constants.CHROME_NEWTAB) {
                                 var div  = document.createElement("div");
                                 var attr = document.createAttribute("class");
-                                attr.value = "container rel_link_container";
+                                attr.value = "row row-eq-height";
                                 div.setAttributeNode(attr);
                                 
-                                div.innerHTML = "<div class=\"row\"><div class=\"col-md-1\" style=\"padding-left:5px; " + 
-                                                "padding-right:0px; padding-top:0px;\"><img src=\"" + 
-                                                (objref.page_info[url].favicon) + "\" width=\"16px\" height=\"16px\" />" + 
-                                                "</div><div class=\"col-md-11\" style=\"padding-left:0px; padding-right:" + 
-                                                "0px;\"><a href=\"#\">" + (objref.page_info[url].page_title || url) + 
-                                                "</a></div></div>";
+                                div.innerHTML = "<div class=\"col-md-1\"><img src=\"" + 
+                                                (objref.page_info[url].favicon) + 
+                                                "\" width=\"16px\" height=\"16px\" />" + 
+                                                "</div><div class=\"col-md-11\">" + 
+                                                "<a href=\"#\">" + 
+                                                (objref.page_info[url].page_title || url) + 
+                                                "</a></div>";
                                 
                                 incoming.appendChild(div);
                             }
@@ -91,15 +90,16 @@ ymt.view = {
                         e.outgoing.forEach(function(url) {
                             var div  = document.createElement("div");
                             var attr = document.createAttribute("class");
-                            attr.value = "container rel_link_container";
+                            attr.value = "row row-eq-height";
                             div.setAttributeNode(attr);
                             
-                            div.innerHTML = "<div class=\"row\"><div class=\"col-md-1\" style=\"padding-left:5px; " + 
-                                            "padding-right:0px; padding-top:0px;\"><img src=\"" + 
-                                            (objref.page_info[url].favicon) + "\" width=\"16px\" height=\"16px\" />" + 
-                                            "</div><div class=\"col-md-11\" style=\"padding-left:0px; padding-right:" + 
-                                            "0px;\"><a href=\"#\">" + (objref.page_info[url].page_title || url) + 
-                                            "</a></div></div>";
+                            div.innerHTML = "<div class=\"col-md-1\"><img src=\"" + 
+                                            (objref.page_info[url].favicon) + 
+                                            "\" width=\"16px\" height=\"16px\" />" + 
+                                            "</div><div class=\"col-md-11\">" + 
+                                            "<a href=\"#\">" + 
+                                            (objref.page_info[url].page_title || url) + 
+                                            "</a></div>";
                             
                             outgoing.appendChild(div);
                         });
@@ -119,32 +119,32 @@ ymt.view = {
                     
                 } 
                 else {
-                    var summary_container = document.getElementById("url_summary_table");
+                    var summary_container = document.getElementById("url-summary-table");
                     summary_container.style.display = "none";
 
-                    var no_summary_container = document.getElementById("no_summary_info_container");
-                    no_summary_container.style.display = null;
+                    var no_summary_holder = document.getElementById("no-summary-info-holder");
+                    no_summary_holder.style.display = null;
 
-                    var incoming_container = document.getElementById("main_url_incoming_container");
+                    var incoming_container = document.getElementsByClassName("main-url-incoming-holder")[0];
                     incoming_container.style.display = "none";
 
-                    var outgoing_container = document.getElementById("main_url_outgoing_container");
+                    var outgoing_container = document.getElementsByClassName("main-url-outgoing-holder")[0];
                     outgoing_container.style.display = "none";
                 }
             } 
             else {
                 // Clicking on no node, hide summary info
 
-                var no_summary_container = document.getElementById("no_summary_info_container");
-                no_summary_container.style.display = null;
+                var no_summary_holder = document.getElementById("no-summary-info-holder");
+                no_summary_holder.style.display = null;
 
-                var summary_container = document.getElementById("url_summary_table");
+                var summary_container = document.getElementById("url-summary-table");
                 summary_container.style.display = "none";
 
-                var incoming_container = document.getElementById("main_url_incoming_container");
+                var incoming_container = document.getElementsByClassName("main-url-incoming-holder")[0];
                 incoming_container.style.display = "none";
 
-                var outgoing_container = document.getElementById("main_url_outgoing_container");
+                var outgoing_container = document.getElementsByClassName("main-url-outgoing-holder")[0];
                 outgoing_container.style.display = "none";
             }
             
@@ -167,7 +167,7 @@ window.addEventListener('DOMContentLoaded', function(evt) {
 
         // Set current concept name
         var concept_name = eventPage.bgraph.bg_page.data.concept_name;
-        $(".current_concept_title").text(concept_name);
+        $(".current-concept-name").text(concept_name);
         
         // Constants for node types in vis js
         var NODE_TYPE = "image";
