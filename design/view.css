@@ -1,0 +1,181 @@
+/* Style on elements */
+/* ----------------- */
+h2, h3 {
+    margin-top      : 10px;
+    margin-bottom   : 10px;
+}
+/* ----------------- */
+
+
+/* Make bootstrap row same height */
+/* ------------------------------ */
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+/* ------------------------------ */
+
+
+/* Padding and margin left/right set to 0.
+   For Padding, including the div.col-* as well */
+/* -------------------------------------------- */
+.no-padding {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.no-padding div[class^="col-md-"]{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.no-margin {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.no-margin div.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+/* -------------------------------------------- */
+
+
+/* Common short styles */
+/* ------------------- */
+.full-width {
+    width: 100%;
+}
+
+.display-hide {
+    display: none;
+}
+/* ------------------- */
+
+
+/* Override bootstrap directly */
+/* --------------------------- */
+.navbar {
+    margin-bottom: 10px;
+}
+/* --------------------------- */
+
+
+/* Left menu UL/LI styles */
+/* ---------------- */
+ul.vertical_navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+}
+
+ul.vertical_navbar li a {
+    display: block;
+    color: #000;
+    padding: 8px 0 8px 16px;
+    text-decoration: none;
+}
+
+ul.vertical_navbar li a.active, ul.vertical_navbar li a.active:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+ul.vertical_navbar li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+/* ---------------- */
+
+
+/* Left menu related stuffs */
+/* ------------------------ */
+div.menu-container {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 3px;
+}
+/* ------------------------ */
+
+
+/* Navbar related stuffs */
+/* --------------------- */
+div.concept-title-holder {
+    padding-left: 10px;
+    color: #FFF;
+}
+
+form.search-holder {
+    padding-right: 15px;
+    margin-right: 0px;
+    margin-top: 10px;
+}
+
+form.search-holder input.form-control {
+    width: 200px;
+}
+/* --------------------- */
+
+
+/* Mid content related stuffs */
+/* -------------------------- */
+div.mid-content-holder {
+    height: 450px;
+    background: #EFF5FB;
+    border: 1px solid #ccc;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 3px;
+}
+/* -------------------------- */
+
+
+/* Right url summary related stuffs */
+/* -------------------------------- */
+div.url-summary-holder {
+    background: #EFF5FB; 
+    padding: 5px; 
+    border: 1px solid #ccc;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 3px;
+}
+
+div.main-url-incoming-holder, div.main-url-outgoing-holder {
+    margin-top:15px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+div#no-summary-info-holder {
+    margin-bottom: 0px;
+}
+
+img.main-url-image {
+    width: 140px;
+    padding-right: 5px;
+}
+
+div.main-url-description-holder {
+    color: #585858;
+}
+
+div.url-incoming-content {
+    padding-top: 5px;
+}
+/* -------------------------------- */
+
+
+/* Temporaries */
+/* ----------- */
+div.main-content-holder {
+    //border: 1px solid red;
+}
+
+.x {
+    border: 1px solid red;
+}
+/* ----------- */

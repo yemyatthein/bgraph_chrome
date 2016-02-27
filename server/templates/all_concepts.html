@@ -39,24 +39,15 @@
     <div style="text-align:left;">
     
         {% for concept_data in data %}
-            <div class="concept_container" data-id="{{ concept_data['id'] }}" style="cursor:pointer; background:#EFF5FB; text-align:left; display:inline-block; margin:10px; border:1px solid #ccc; padding:15px; padding-top:0px; padding-bottom:0px; min-height:225px; vertical-align:bottom;">
-                <h3>{{ concept_data['concept']['name'] }}:</h3> 
+            <div class="concept_container" data-id="{{ concept_data['id'] }}" style="cursor:pointer; background:#EFF5FB; text-align:left; display:inline-block; margin:10px; border:1px solid #ccc; padding:10px; padding-top:0px; padding-bottom:10px; vertical-align:bottom;">
+                <h4>{{ concept_data['concept']['name'] }}:</h4> 
 
-                
-                <div style="color:#585858" title="{{ concept_data['concept']['description'] }}">
-                    {{ concept_data['concept']['description'][:70] }}
-
-                    {% if ((concept_data['concept']['description']|count) > 70)  %}
-                        ...
-                    {%endif%}
-
-                </div>
 
                 <div style="margin-top:15px;">
                     {% for node in concept_data['refined']['nodes'][7:10] %}
                         {% if node['id'] != 'chrome://newtab/' %}
                             <span>
-                                <img width="180px" height="120px"
+                                <img width="124px" height="88px"
                                     src="{{ concept_data['original']['page_info'][node['id']]['image'] }}" />
                             </span>
                         {% endif %}

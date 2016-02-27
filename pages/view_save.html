@@ -15,20 +15,19 @@
 
 	<nav class="navbar navbar-inverse navbar-static-top">
 		<div class="container-fluid">
-			<div class="navbar-header" style="width:100%;">
+			<div class="navbar-header full_width">
 				
-				<table style="width:100%;">
+				<table class="full_width">
 					<tr>
 						<td>
 							<h2 class="current_concept_title">Concept Title</h2>
 						</td>
-						<td style="text-align:right">
+						<td class="right_align_td">
 
-							<form class="navbar-form navbar-left" role="search" style="width:100%;">
+							<form class="navbar-form navbar-left full_width" role="search">
 							    <div class="form-group">
-							        <input type="text" class="form-control" style="width:200px;" placeholder="Search">
+							        <input type="text" class="form-control search_box" placeholder="Search">
 							    </div>
-							    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
 							</form>
 
 						</td>
@@ -52,44 +51,44 @@
 	            <div class="col-md-8">
 	            	<div id="mynetwork" class="left_holder">
 	            		
-	            		<div class="save_bgraph_form_container" style="padding-left:10px; padding-right:10px; padding-top:5px; color:#585858;">
+	            		<div class="save_bgraph_form_container">
 
-	            			<div class="alert alert-warning" style="padding:5px;">
+	            			<div class="alert alert-warning concept_save_warning">
 	            				Researching a concept is ended once you save it in cloud.
 	            			</div>
 	            			
 	            			<h3>Save this concept in cloud</h3>
 	            			<div>
-		            			<div style="border-top:1px solid #ccc; border-bottom:1px solid #ccc; width:430px; padding-top:10px; padding-bottom:10px; margin-top:25px;">
-			            			<table style="width:100%;">
+		            			<div class="save_concept_form">
+			            			<table class="full_width">
 			            				<tr>
-			            					<td style="width:130px;">Concept Name:</td>
+			            					<td class="concept_form_datafield">Concept Name:</td>
 			            					<td>
-			            						<div style="padding-top:4px; padding-bottom:4px;">
-			            							<input style="width:300px; border:1px solid #ccc; border:1px solid #ccc;" type="text" id="save_concept_name" disabled >
+			            						<div class="concept_form_datavalue">
+			            							<input class="concept_input" type="text" id="save_concept_name" disabled >
 			            						</div>
 			            					</td>
 			            				</tr>
 			            				<tr>
-			            					<td style="width:130px; vertical-align:top;">Description:</td>
+			            					<td class="concept_form_datafield">Description:</td>
 			            					<td>
-			            						<div style="padding-top:4px; padding-bottom:4px;">
-			            							<textarea style="width:300px; max-width:300px; border:1px solid #ccc;" id="save_concept_description"></textarea>
+			            						<div class="concept_form_datavalue">
+			            							<textarea class="concept_input" id="save_concept_description"></textarea>
 			            						</div>
 			            					</td>
 			            				</tr>
 			            				<tr>
-			            					<td style="width:130px;">Tags:</td>
+			            					<td class="concept_form_datafield">Tags:</td>
 			            					<td>
-			            						<div style="padding-top:4px; padding-bottom:4px;">
-			            							<input style="width:300px; border:1px solid #ccc;" type="text" id="save_concept_tags" >
+			            						<div class="concept_form_datavalue">
+			            							<input class="concept_input" type="text" id="save_concept_tags" >
 			            						</div>
 			            					</td>
 			            				</tr>
 			            				<tr>
-			            					<td style="width:130px;">Visible:</td>
+			            					<td class="concept_form_datafield">Visible:</td>
 			            					<td>
-			            						<div style="padding-top:4px; padding-bottom:4px;">
+			            						<div class="concept_form_datavalue">
 			            							<input type="radio" checked name="save_concept_visible" value="PRIVATE"> Private
 			            							&nbsp;&nbsp;&nbsp;
 			            							<input type="radio" name="save_concept_visible" value="PUBLIC"> Public
@@ -99,7 +98,7 @@
 			            			</table>
 		            			</div>
 
-		            			<div style="margin-top:15px; width:430px; text-align:left">
+		            			<div class="concept_save_btn_row">
         							<button class="btn btn-primary" id="save_in_cloud">Save</button>
         						</div>
 

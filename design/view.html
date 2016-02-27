@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+
+    <link href="view.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+    <!-- Navigation header bar starts -->
+
+    <div class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+        
+            <div class="row row-eq-height no-padding">
+                <div class="col-md-6 full-width">
+                    <div class="concept-title-holder">
+                        <h2>
+                            Concept Title
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-md-6 full-width">
+                    <form class="navbar-form navbar-right search-holder" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Navigation header bar end -->
+
+    <!-- Main content starts -->
+
+    <div class="container-fluid main-content-holder no-padding no-margin full-width">
+        <div class="row">
+
+            <!-- Main content left starts -->
+
+            <div class="col-md-2">
+                <div class="menu-container">
+                    <ul class="vertical_navbar nav nav-pills nav-stacked">
+                        <li>
+                            <a class="active" href="view.html">
+                                Browsing Graph
+                            </a>
+                        </li>
+                        <li>
+                            <a href="view_list.html">
+                                Resource List
+                            </a>
+                        </li>
+                        <li>
+                            <a href="view_save.html">
+                                Save Concept
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main content left ends -->
+
+            <!-- Main content mid starts -->
+            
+            <div class="col-md-7">
+                <div id="network-graph" class="mid-content-holder">
+                    
+                </div>
+            </div>
+
+            <!-- Main content mid ends -->
+
+            <!-- Main content right starts -->
+            
+            <div class="col-md-3">
+                
+                <div class="url-summary-holder">
+                    <div id="no-summary-info-holder" class="alert alert-success" style="display:none;">
+                        Click on a node for summary
+                    </div>
+
+                    <table id="url-summary-table" class="full-width">
+                        <tr>
+                            <td>
+                                <img src="http://goo.gl/jlzYUA" class="main-url-image" align="left" />
+
+                                <div>
+                                    <b>
+                                        <span id="main-url-title">
+                                            Hello World
+                                        </span>
+                                    </b>
+                                </div>
+                                <div id="main-url-description-holder" class="main-url-description-holder">
+                                    Hello is a good word but world is not. Hello is a good word but world is not. Hello is a good word but world is not. Hello is a good word but world is not. Hello is a good word but world is not.
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="main-url-incoming-holder">
+                    <div><b>Incoming links</b></div>
+                    
+                    <div class="url-incoming-content">
+                        
+                        <!-- For each incoming URL starts -->
+                        <div class="row row-eq-height">
+                            <div class="col-md-1">
+                                <img src="http://goo.gl/eytjs7" width="16px" height="16px">
+                            </div>
+                            <div class="col-md-11">
+                                <a href="#">
+                                    CNN - Breaking News, U.S., World, Weather, Entertainment &amp; Video News
+                                </a>
+                            </div>
+                        </div>
+                        <!-- For each incoming URL ends -->
+
+                        <!-- For each incoming URL starts -->
+                        <div class="row row-eq-height">
+                            <div class="col-md-1">
+                                <img src="http://goo.gl/eytjs7" width="16px" height="16px">
+                            </div>
+                            <div class="col-md-11">
+                                <a href="#">
+                                    CNN - Breaking News, U.S., World, Weather, Entertainment &amp; Video News
+                                </a>
+                            </div>
+                        </div>
+                        <!-- For each incoming URL ends -->
+
+                    </div>
+
+                </div>
+
+                <div class="main-url-outgoing-holder">
+                    <div><b>Outgoing links</b></div>
+
+                    <div class="url-outgoing-content">
+
+                        <!-- For each outgoing URL starts -->
+                        <div class="row row-eq-height">
+                            <div class="col-md-1">
+                                <img src="http://goo.gl/eytjs7" width="16px" height="16px">
+                            </div>
+                            <div class="col-md-11">
+                                <a href="#">
+                                    CNN - Breaking News, U.S., World, Weather, Entertainment &amp; Video News
+                                </a>
+                            </div>
+                        </div>
+                        <!-- For each outgoing URL ends -->
+
+                        <!-- For each outgoing URL starts -->
+                        <div class="row row-eq-height">
+                            <div class="col-md-1">
+                                <img src="http://goo.gl/eytjs7" width="16px" height="16px">
+                            </div>
+                            <div class="col-md-11">
+                                <a href="#">
+                                    CNN - Breaking News, U.S., World, Weather, Entertainment &amp; Video News
+                                </a>
+                            </div>
+                        </div>
+                        <!-- For each outgoing URL ends -->
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Main content right ends -->
+
+        </div>
+    </div>
+
+    <!-- Main content ends -->
+
+</body>
+
+</html>

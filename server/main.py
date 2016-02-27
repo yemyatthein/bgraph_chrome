@@ -77,8 +77,6 @@ def viewList(uid):
 @app.route('/all_concepts', methods=['GET'])
 def all_concepts():
     
-    #assert 0, session.get(SESSION_KEY, 'ppp')
-
     """
     if 'yemyat_site' in session:
         print 'Found session => ', session['yemyat_site']
