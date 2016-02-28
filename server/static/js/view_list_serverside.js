@@ -77,7 +77,7 @@ window.addEventListener('DOMContentLoaded', function(evt) {
 
     ymt.view.page_info  = ds_page_info;
 
-    var res_list = document.getElementById("res_list");
+    var res_list = document.getElementsById("resource-list");
     
     res_list.style.visibility = "hidden";
 

@@ -8,6 +8,7 @@
 
     <script type="text/javascript" src="../js/vendors/jquery.min.js"></script>
     <script type="text/javascript" src="../js/vendors/vis.js"></script>
+    <script type="text/javascript" src="../js/lib.js"></script>
     <script type="text/javascript" src="../js/view.js"></script>
 </head>
 
@@ -22,7 +23,7 @@
                 <div class="col-md-6 full-width">
                     <div class="concept-title-holder">
                         <h2 class="current-concept-name">
-                            Concept Title
+                            
                         </h2>
                     </div>
                 </div>
@@ -86,23 +87,23 @@
             <div class="col-md-3">
                 
                 <div class="url-summary-holder">
-                    <div id="no-summary-info-holder" class="alert alert-success" style="display:none;">
+                    <div id="no-summary-info-holder" class="alert alert-success">
                         Click on a node for summary
                     </div>
 
-                    <table id="url-summary-table" class="full-width">
+                    <table id="url-summary-table" class="full-width display-hide">
                         <tr>
                             <td>
-                                <img src="http://goo.gl/jlzYUA" id="main-url-image" class="main-url-image" align="left" />
+                                <img src="http://goo.gl/jlzYUA" class="main-url-image" align="left" />
 
                                 <div>
                                     <b>
-                                        <span id="main-url-title">
+                                        <span class="main-url-title">
                                             Hello World
                                         </span>
                                     </b>
                                 </div>
-                                <div id="main-url-description-holder" class="main-url-description-holder">
+                                <div class="main-url-description">
                                     Hello is a good word but world is not. Hello is a good word but world is not. Hello is a good word but world is not. Hello is a good word but world is not. Hello is a good word but world is not.
                                 </div>
                             </td>
@@ -115,19 +116,6 @@
                     
                     <div class="url-incoming-content">
                         
-                        <!-- For each incoming URL starts -->
-                        <div class="row row-eq-height">
-                            <div class="col-md-1">
-                                <img src="http://goo.gl/eytjs7" width="16px" height="16px">
-                            </div>
-                            <div class="col-md-11">
-                                <a href="#">
-                                    CNN - Breaking News, U.S., World, Weather, Entertainment &amp; Video News
-                                </a>
-                            </div>
-                        </div>
-                        <!-- For each incoming URL ends -->
-
                         <!-- For each incoming URL starts -->
                         <div class="row row-eq-height">
                             <div class="col-md-1">
@@ -162,20 +150,7 @@
                             </div>
                         </div>
                         <!-- For each outgoing URL ends -->
-
-                        <!-- For each outgoing URL starts -->
-                        <div class="row row-eq-height">
-                            <div class="col-md-1">
-                                <img src="http://goo.gl/eytjs7" width="16px" height="16px">
-                            </div>
-                            <div class="col-md-11">
-                                <a href="#">
-                                    CNN - Breaking News, U.S., World, Weather, Entertainment &amp; Video News
-                                </a>
-                            </div>
-                        </div>
-                        <!-- For each outgoing URL ends -->
-
+                        
                     </div>
                 </div>
 

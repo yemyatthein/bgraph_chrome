@@ -159,7 +159,7 @@ img.main-url-image {
     padding-right: 5px;
 }
 
-div.main-url-description-holder {
+div.main-url-description {
     color: #585858;
 }
 
@@ -179,3 +179,31 @@ div.main-content-holder {
     border: 1px solid red;
 }
 /* ----------- */
+
+
+/* View list */
+
+div.loading-icon-container {
+    color:#909090;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+div.grid {
+    padding: 3px; 
+    padding-left: 7px;
+}
+
+div.grid-item {
+    width: 170px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    padding: 4px;
+    background: #fff;
+    margin: 5px;
+}
+
+div.grid-item-selected {
+    border: 2px solid #8B0000;
+}
