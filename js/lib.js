@@ -120,6 +120,26 @@ ymt.lib = {
         },
         CHROME_NEWTAB: "chrome://newtab/",
     },
+
+    // Check if user is logged in
+    // 
+    isAuthenticated: function () {
+        "use strict";
+
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:5000/is_authenticated",
+            success: function(response) {
+                if (response.user_authenticated === false) {
+                    window.open(
+                        "http://localhost:5000/login?referer=" 
+                        + encodeURIComponent(window.location.href),
+                        "_blank");
+                }
+            },
+            dataType: "json"
+        });
+    },
     
     // Build a browsing graph from data captured by background/event page
     // 

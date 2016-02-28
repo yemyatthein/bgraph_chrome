@@ -63,10 +63,10 @@ window.addEventListener('DOMContentLoaded', function(evt) {
 
         $(".grid-item").click(function(d){
             if (selected) {
-                selected.css("background", "#FFF");
+                selected.removeClass("grid-item-selected");
             }
             selected = $(this);
-            selected.css("background", "#FEE6C4");
+            selected.addClass("grid-item-selected");
 
             ymt.url_summary.show(selected.attr("url-data"), 
                                  edge_data, ds_page_info,
