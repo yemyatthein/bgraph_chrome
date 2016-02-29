@@ -2,8 +2,6 @@
 <head>
     <title>Facebook JS Login Test</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
-    <link href="{{ url_for('static', filename='styles/view.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ url_for('static', filename='styles/main.css') }}" rel="stylesheet" type="text/css"/>
 
     <style type="text/css">
         .fb_iframe_widget iframe {
@@ -126,45 +124,15 @@
         }
     </script>
 
-    <!-- Navigation header bar starts -->
-
-    <div class="navbar navbar-inverse navbar-static-top">
-        <div class="container-fluid">
-        
-            <div class="row row-eq-height no-padding">
-                <div class="col-md-6 full-width">
-                    <div class="concept-title-holder">
-                        <a class="navbar-brand" rel="home" href="{{ url_for('all_concepts') }}">
-                            <img class="logo"
-                                 src="{{ url_for('static', filename='logo.png') }}">
-                        </a>
-                        <h2 class="current-concept-name">
-                            Browsing Graph
-                        </h2>
-                    </div>
-                </div>
-                <div class="col-md-6 full-width">
-                    
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Navigation header bar end -->
     
-    <div style="text-align:left; margin-left:20px; margin-top:40px; color:#585858;">
-        <h5>Browsing Graph captures a concept you define.</h5>
+    <div style="padding:20px; display:inline-block; background:#EFF5FB; margin:10px; border:1px solid #ccc;">
+        
+        <span style="margin-right:10px;">
+            <strong>Log in With Facebook: </strong>
+        </span>
 
-        <div style="padding:20px; display:inline-block; background:#EFF5FB; margin:10px; margin-left:0px; padding-bottom:30px; border:1px solid #ccc;">
-            
-            <span style="margin-right:10px;">
-                <strong>Log in With Facebook: </strong>
-            </span>
-
-            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-            </fb:login-button>
-        </div>
+        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+        </fb:login-button>
     </div>
     
     

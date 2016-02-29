@@ -1,52 +1,3 @@
-var ymt = ymt || {};
-
-
-ymt.view = {
-
-    // Render graph in vis js given graph data. Register event
-    // handlers for clicking on nodes as well.
-    // 
-    renderGraph: function (nodes, edges, edge_data, page_info) {
-        "use strict";
-
-        // Convert to vis data format
-        nodes = new vis.DataSet(nodes);
-        edges = new vis.DataSet(edges);
-
-        // HTML element in which graph is shown
-        var container = $('#network-graph')[0];
-        
-        // Data for vis js
-        var options = {};
-        var data    = {nodes: nodes, edges: edges};
-        
-        var network = new vis.Network(container, data, options);
-
-        network.on("click", function (params) {
-            if (params.nodes.length > 0) {
-                // Clicking on a node
-
-                ymt.url_summary.show(params.nodes[0], 
-                                     edge_data, page_info,
-                                     $("#url-summary-table"),
-                                     $(".main-url-incoming-holder"),
-                                     $(".main-url-outgoing-holder"),
-                                     $("#no-summary-info-holder"));
-            } 
-            else {
-                // Clicking on no node, hide summary info
-
-                $("#no-summary-info-holder").show();
-                $("#url-summary-table").hide();
-                $(".main-url-incoming-holder").hide();
-                $(".main-url-outgoing-holder").hide();
-            }
-            
-        });
-    },
-};
-
-
 window.addEventListener('DOMContentLoaded', function(evt) {
     
     // Get background/event page
@@ -71,7 +22,7 @@ window.addEventListener('DOMContentLoaded', function(evt) {
         });
 
         // Call render function
-        ymt.view.renderGraph(data.nodes, data.edges, data.edge_data, ds_page_info);
+        ymt.lib.renderGraph(data.nodes, data.edges, data.edge_data, ds_page_info);
 
     });
     

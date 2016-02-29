@@ -1,55 +1,197 @@
-input[type="text"][disabled] {
-   background: #E5E4E2;
-   font-weight: bold;
+/* Style on elements */
+/* ----------------- */
+h2, h3 {
+    margin-top      : 10px;
+    margin-bottom   : 10px;
 }
-div.bscol_veritcal_navbar {
-    padding-right: 0px;
+/* ----------------- */
+
+
+/* Make bootstrap row same height */
+/* ------------------------------ */
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
 }
-div.bscol_main_content_holder {
-    padding-left: 0px;
-}
-div.bscol_url_summary_holder {
+/* ------------------------------ */
+
+
+/* Padding and margin left/right set to 0.
+   For Padding, including the div.col-* as well */
+/* -------------------------------------------- */
+.no-padding {
     padding-left: 0px;
     padding-right: 0px;
 }
 
-h2.current_concept_title {
-    color: #FFFFFF;
+.no-padding div[class^="col-md-"]{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.no-margin {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.no-margin div.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+/* -------------------------------------------- */
+
+
+/* Common short styles */
+/* ------------------- */
+.full-width {
+    width: 100%;
+}
+
+.display-hide {
+    display: none;
+}
+
+input:disabled {
+    background: #F2F2F2;
+}
+/* ------------------- */
+
+
+/* Override bootstrap directly */
+/* --------------------------- */
+.navbar {
+    margin-bottom: 10px;
+}
+/* --------------------------- */
+
+
+/* Left menu UL/LI styles */
+/* ---------------- */
+ul.vertical-navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+}
+
+ul.vertical-navbar li a {
+    display: block;
+    color: #000;
+    padding: 8px 0 8px 16px;
+    text-decoration: none;
+}
+
+ul.vertical-navbar li a.active, ul.vertical-navbar li a.active:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+ul.vertical-navbar li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+/* ---------------- */
+
+
+/* Left menu related stuffs */
+/* ------------------------ */
+div.menu-container {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 3px;
+}
+/* ------------------------ */
+
+
+/* Navbar related stuffs */
+/* --------------------- */
+div.concept-title-holder {
+    padding-left: 10px;
+    color: #FFF;
+}
+
+form.search-holder {
+    padding-right: 15px;
+    margin-right: 0px;
     margin-top: 10px;
 }
 
-div.container {
-    width: 100%;
-    padding-top: 10px;
+form.search-holder input.form-control {
+    width: 200px;
 }
+/* --------------------- */
 
-div.container_content_part {
-    margin-top: -15px;
-}
 
-div#mynetwork {
+/* Mid content related stuffs */
+/* -------------------------- */
+div.mid-content-holder {
     height: 450px;
     background: #EFF5FB;
     border: 1px solid #ccc;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 3px;
+}
+/* -------------------------- */
+
+
+/* Right url summary related stuffs */
+/* -------------------------------- */
+div.url-summary-holder {
+    background: #EFF5FB; 
+    padding: 5px; 
+    border: 1px solid #ccc;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 3px;
 }
 
-div#main_url_incoming {
-    margin-top: 5px;
+div.main-url-incoming-holder, div.main-url-outgoing-holder {
+    margin-top:15px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
-div#main_url_outgoing {
-    margin-top: 5px;
+div#no-summary-info-holder {
+    margin-bottom: 0px;
 }
 
-div.loading_icon_container {
+img.main-url-image {
+    width: 140px;
+    padding-right: 5px;
+}
+
+div.main-url-description {
+    color: #585858;
+}
+
+div.url-incoming-content, div.url-outgoing-content {
+    padding-top: 5px;
+}
+/* -------------------------------- */
+
+
+/* Temporaries */
+/* ----------- */
+div.main-content-holder {
+    //border: 1px solid red;
+}
+
+.x {
+    border: 1px solid red;
+}
+/* ----------- */
+
+
+/* View list */
+
+div.loading-icon-container {
     color:#909090;
     padding-left: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
-}
-
-div#main_url_outgoing_container {
-    margin-top: 15px;
 }
 
 div.grid {
@@ -58,84 +200,53 @@ div.grid {
 }
 
 div.grid-item {
-    width: 155px;
+    width: 170px;
     cursor: pointer;
-    border: 1px solid #ccc;
+    border: 1px solid #CCC;
     padding: 4px;
-    background: #fff;
-    margin: 4px;
+    background: #FFF;
+    margin: 5px;
 }
 
 div.grid-item-selected {
-    border: 2px solid #8B0000;
+    background: #FEE6C4;
 }
 
-div.url_summary_container {
-    background: #EFF5FB; 
-    padding: 5px; 
-    border: 1px solid #ccc;
+/* View save */
+
+div.save-concept-form {
+    padding-left: 10px; 
+    padding-right: 10px;
+    color: #585858;
 }
 
-div.left_holder {
+div.save-concept-form input[type=text] {
     width: 100%;
+    height: 30px;
+    border: 1px solid #CCC;
 }
 
-div.rel_link_container {
-    padding-top: 0px;
-}
-
-div.links_title_holder {
-    padding-bottom: 5px;
-}
-
-div.url_summary_img_container {
-    width: 145px;
-    max-height: 212px;
-}
-
-img#main_url_image {
-    width: 145px;
-    padding-right: 5px;
-}
-
-table.url_summary_table {
+div.save-concept-form textarea {
     width: 100%;
+    height: 60px;
+    border: 1px solid #CCC;
+    resize: none;
 }
 
-table.url_summary_table td {
+td.concept-form-datafield {
+    width: 25%;
+    padding-bottom: 10px;
     vertical-align: top;
 }
-td.url_summary_img_td {
-    width: 145px;
-}
-td.url_summary_text_td {
-    padding-left: 5px;
+
+td.concept-form-datavalue {
+    padding-bottom: 10px;
+    vertical-align: top;
 }
 
-div.url_summary_text_content {
-    padding-top: 5px;
-}
-
-ul.vertical_navbar {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    background-color: #f1f1f1;
-}
-
-ul.vertical_navbar li a {
-    display: block;
-    color: #000;
-    padding: 8px 0 8px 16px;
-    text-decoration: none;
-}
-
-ul.vertical_navbar li a.active, ul.vertical_navbar li a.active:hover {
-    background-color: #4CAF50;
-    color: white;
-}
-
-ul.vertical_navbar li a:hover:not(.active) {
-    background-color: #555;
-    color: white;
+div.concept-save-btn-row {
+    margin-top: 5px;
+    text-align: right;
+    padding-right: 2px;
+    width:100%;
 }

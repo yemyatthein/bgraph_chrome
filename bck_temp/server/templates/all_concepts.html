@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/vendors/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/all_concepts.js') }}"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header" style="width:100%;">
+                
+                <table style="width:100%;">
+                    <tr>
+                        <td>
+                            <h2 class="current_concept_title" style="color:#fff">Browsing Graph</h2>
+                        </td>
+                        <td style="text-align:right">
+
+                            <form class="navbar-form navbar-left" role="search" style="width:100%;">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" style="width:200px;" placeholder="Search">
+                                </div>
+                                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                            </form>
+
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </nav>
+
+    <div style="text-align:left;">
+    
+        {% for concept_data in data %}
+            <div class="concept_container" data-id="{{ concept_data['id'] }}" style="cursor:pointer; background:#EFF5FB; text-align:left; display:inline-block; margin:10px; border:1px solid #ccc; padding:10px; padding-top:0px; padding-bottom:10px; vertical-align:bottom;">
+                <h4>{{ concept_data['concept']['name'] }}</h4> 
+
+
+                <div style="margin-top:15px;">
+                    {% for node in concept_data['refined']['nodes'][7:10] %}
+                        {% if node['id'] != 'chrome://newtab/' %}
+                            <span>
+                                <img width="124px" height="88px"
+                                    src="{{ concept_data['original']['page_info'][node['id']]['image'] }}" />
+                            </span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
