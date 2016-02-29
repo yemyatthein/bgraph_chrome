@@ -28,73 +28,73 @@ window.addEventListener('DOMContentLoaded', function(evt) {
         
         console.log("DEBUG: Current concept name is " + concept_name);
 
-        $("#view_bgraph").click(function() {
+        $("#view-bgraph").click(function() {
             ymt.popup.view_bgraph(event_page.bgraph.bg_page.data);
         });
 
-        $("#end_bgraph").click(function() {
-            $("#unsaved_warning").show();
+        $("#end-bgraph").click(function() {
+            $("#unsaved-warning-display").show();
         });
 
-        $("#new_bgraph").click(function() {
-            $("#unsaved_warning").show();
+        $("#new-bgraph").click(function() {
+            $("#unsaved-warning-display").show();
         });
 
-        $(".save_bgraph").click(function() {
+        $(".save-bgraph").click(function() {
             var form_data = {};
             ymt.popup.save_bgraph(form_data);
         });
 
-        $("#close_warning_btn").click(function(e) {
-            $("#unsaved_warning").hide();
+        $("#close-warning-btn").click(function(e) {
+            $("#unsaved-warning-display").hide();
         });
 
-        $("#unsaved_end_proceed").click(function() {
+        $("#unsaved-end-proceed").click(function() {
             chrome.runtime.sendMessage({
                 type : "end_concept"
             });
 
-            $("#unsaved_warning").hide();
-            $("#loading_concept").hide();
-            $("#currently_pursuing").hide();
-            $("#new_topic_ask_container").show();
+            $("#unsaved-warning-display").hide();
+            $("#loading-concept").hide();
+            $("#currently-pursuing").hide();
+            $("#new-topic-ask-container").show();
 
-            $("#topic_name").val("");
+            $("#topic-name").val("");
         });
         
-        $("#btn_new_topic").on("click", function() {
-            $("#new_topic_ask_container").hide();
-            $("#new_topic_form_container").show();
+        $("#btn-new-topic").on("click", function() {
+            $("#new-topic-ask-container").hide();
+            $("#new-topic-form-container").show();
         });
 
-        $("#btn_create_now").on("click", function() {
-            $("#loading_concept").hide();
-            $("#new_topic_ask_container").hide();
-            $("#currently_pursuing").show();
+        $("#btn-create-now").on("click", function() {
+            $("#loading-concept").hide();
+            $("#new-topic-ask-container").hide();
+            $("#currently-pursuing").show();
 
-            var concept_name = $("#topic_name").val() || "Default Name";
+            var concept_name = $("#topic-name").val() || "Default Name";
 
             chrome.runtime.sendMessage({
                 type : "new_concept",
                 name : concept_name
             });
             
-            $("#current_concept_title").text(concept_name);
-            $("#current_concept_title_warning").text(concept_name);
+            $("#current-concept-title").text(concept_name);
+            $("#current-concept-title-warning").text(concept_name);
         });
 
         if (concept_name) {
-            $("#loading_concept").hide();
-            $("#new_topic_ask_container").hide();
-            $("#currently_pursuing").show();
+            $("#loading-concept").hide();
+            $("#new-topic-ask-container").hide();
+            $("#currently-pursuing").show();
 
-            $("#current_concept_title").text(concept_name);
-            $("#current_concept_title_warning").text(concept_name);
+            $("#current-concept-title").text(concept_name);
+            $("#current-concept-title-warning").text(concept_name);
         }
         else {
-            $("#loading_concept").hide();
-            $("#currently_pursuing").hide();
-            $("#new_topic_ask_container").show();
+            $("#loading-concept").hide();
+            $("#currently-pursuing").hide();
+            $("#new-topic-ask-container").show();
         }
     });
 

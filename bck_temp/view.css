@@ -1,0 +1,208 @@
+
+
+// TEMP //
+
+input[type="text"][disabled] {
+   background: #E5E4E2;
+   font-weight: bold;
+}
+div.bscol_veritcal_navbar {
+    padding-right: 0px;
+}
+div.bscol_main_content_holder {
+    padding-left: 0px;
+}
+div.bscol_url_summary_holder {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+h2.current_concept_title {
+    color: #FFFFFF;
+    margin-top: 10px;
+}
+
+div.container {
+    width: 100%;
+    padding-top: 10px;
+}
+
+div.container_content_part {
+    margin-top: -15px;
+}
+
+div#mynetwork {
+    height: 450px;
+    background: #EFF5FB;
+    border: 1px solid #ccc;
+}
+
+div#main_url_incoming {
+    margin-top: 5px;
+}
+
+div#main_url_outgoing {
+    margin-top: 5px;
+}
+
+div.loading_icon_container {
+    color:#909090;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+div#main_url_outgoing_container {
+    margin-top: 15px;
+}
+
+div.grid {
+    padding: 3px; 
+    padding-left: 7px;
+}
+
+div.grid-item {
+    width: 155px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    padding: 4px;
+    background: #fff;
+    margin: 4px;
+}
+
+div.grid-item-selected {
+    border: 2px solid #8B0000;
+}
+
+div.url_summary_container {
+    background: #EFF5FB; 
+    padding: 5px; 
+    border: 1px solid #ccc;
+}
+
+div.left_holder {
+    width: 100%;
+}
+
+div.rel_link_container {
+    padding-top: 0px;
+}
+
+div.links_title_holder {
+    padding-bottom: 5px;
+}
+
+div.url_summary_img_container {
+    width: 145px;
+    max-height: 212px;
+}
+
+img#main_url_image {
+    width: 145px;
+    padding-right: 5px;
+}
+
+table.url_summary_table {
+    width: 100%;
+}
+
+table.url_summary_table td {
+    vertical-align: top;
+}
+td.url_summary_img_td {
+    width: 145px;
+}
+td.url_summary_text_td {
+    padding-left: 5px;
+}
+
+div.url_summary_text_content {
+    padding-top: 5px;
+}
+
+ul.vertical_navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+}
+
+ul.vertical_navbar li a {
+    display: block;
+    color: #000;
+    padding: 8px 0 8px 16px;
+    text-decoration: none;
+}
+
+ul.vertical_navbar li a.active, ul.vertical_navbar li a.active:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+ul.vertical_navbar li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+
+input.search_box {
+    width: 200px;
+}
+
+.full_width {
+    width: 100%;
+}
+td.right_align_td {
+    text-align: right;
+}
+
+div.save_bgraph_form_container {
+    padding-left: 10px; 
+    padding-right: 10px; 
+    padding-top: 5px; 
+    color: #585858;
+}
+
+div.save_concept_form {
+    border-top: 1px solid #ccc; 
+    border-bottom: 1px solid #ccc; 
+    width: 430px; 
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+    margin-top: 25px;
+}
+
+td.concept_form_datafield {
+    width: 130px;
+}
+
+div.concept_form_datavalue {
+    padding-top: 4px; 
+    padding-bottom: 4px;
+}
+
+input.concept_input {
+    width: 300px; 
+    border: 1px solid #ccc;
+}
+
+textarea.concept_input {
+    width: 300px;
+    height: 130px;
+    resize: none;
+    max-width: 300px; 
+    border: 1px solid #ccc;
+}
+
+div.concept_save_btn_row {
+    margin-top: 15px; 
+    width: 430px; 
+    text-align: left;
+}
+
+div.concept_save_warning {
+    padding: 5px;
+}
+
+
+
+

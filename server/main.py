@@ -1,4 +1,5 @@
 import json
+import json
 import base64
 from flask import (Flask, request, make_response, jsonify, 
                    redirect, render_template, url_for, session)
@@ -41,6 +42,7 @@ def save():
         'concept'   : json.loads(request.form['concept']),
         'original'  : json.loads(request.form['original']),
         'refined'   : json.loads(request.form['refined']),
+        'indexes'   : json.loads(request.form['indexes']),
     }
 
     col_concepts.insert(concept, check_keys=False)

@@ -19,6 +19,33 @@ window.addEventListener('DOMContentLoaded', function(evt) {
 			var original_data = eventPage.bgraph.bg_page.data;
 			var refined_data  = eventPage.bgraph.bg_page.refined_data;
 
+            // Build index
+            // --------------
+            var inverted_index = {};
+
+            Object.keys(original_data.page_info).forEach(function(url) {
+                var page           = original_data.page_info[url];
+                var indexable_data = page.page_title + page.description;
+                indexable_data     = ymt.stopwords.removeStopWords(indexable_data);
+                indexable_data     = indexable_data.split(" ");
+
+                indexable_data = indexable_data
+                    .filter(function(k) { 
+                        return k.length > 3;
+                    })
+                    .map(function(k) { 
+                        return k.replace(/,|\./g, "").toLowerCase(); 
+                    });
+
+                indexable_data.forEach(function(keyword) {
+                    if (inverted_index[keyword] === undefined) {
+                        inverted_index[keyword] = {};
+                    }
+                    inverted_index[keyword][url] = true;
+                });
+            });
+            // --------------
+
             var concept_data = {
 				name 		: $("#save-concept-name").val(),
 				description	: $("#save-concept-description").val(),
@@ -29,13 +56,13 @@ window.addEventListener('DOMContentLoaded', function(evt) {
 			var form_data = {
 				concept  : JSON.stringify(concept_data),
 				original : JSON.stringify(original_data),
-				refined  : JSON.stringify(refined_data)
+				refined  : JSON.stringify(refined_data),
+                indexes  : JSON.stringify(inverted_index)
 			};
 
-			console.log("DEBUG: Submitting data to cloud.", form_data);
+            console.log("DEBUG: Submitting data to cloud.", form_data);
 
-			/*
-            $.ajax({
+			$.ajax({
 				type: "POST",
 				url: "http://localhost:5000/save",
 				data: form_data,
@@ -44,7 +71,6 @@ window.addEventListener('DOMContentLoaded', function(evt) {
 				},
 				dataType: "json"
 			});
-            */
 
         });
 

@@ -3,71 +3,68 @@
 
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
-	<link href="../styles/vendors/bootstrap-switch.css" rel="stylesheet">
 	<link href="../styles/popup.css" rel="stylesheet">
 
 	<script type="text/javascript" src="../js/vendors/jquery.min.js"></script>
-	<script src="../bootstrap.min.js"></script>
-	<script type="text/javascript" src="../js/vendors/bootstrap-switch.js"></script>
+	<script src="../js/vendors/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../js/popup.js"></script>
 </head>
 
 <body>
-	<div id="main_content">
+	<div class="main-content">
 		
-		<div class="loading_icon_container" id="loading_concept">
-    		<img src="https://mmstatic.thcdn.com/4.00.27.9059/img/ajax-loader7.gif" width="30px">
+		<div class="loading-icon-container" id="loading-concept">
+    		<img src="https://goo.gl/IIsgCq">
     		<span>Loading current concept</span>
     	</div>
 
-    	<div id="unsaved_warning" style="display:none;">
-    		<div style="float:right; margin-right:10px; margin-top:3px;">
-    			<button type="button" id="close_warning_btn" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+    	<div id="unsaved-warning-display" class="unsaved-warning-display display-hide">
+    		<div class="close-btn-holder">
+    			<button type="button" id="close-warning-btn" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
     		</div>
-	    	<div class="alert alert-warning" id="warning_content_container">
-				This action will discard all data about <strong id="current_concept_title_warning">Popular Music</strong>. Are you sure want to proceed?
-				<div style="text-align:right; margin-top:15px;">
-					<button class="btn btn-default" id="unsaved_end_proceed">Proceed</button>
-					<button class="btn btn-default save_bgraph" id="">Save</button>
+	    	
+	    	<div class="alert alert-warning">
+				This action will discard all data about <strong id="current-concept-title-warning"></strong>. Are you sure want to proceed?
+				<div class="confirm-btn-holder">
+					<button class="btn btn-default" id="unsaved-end-proceed">Proceed</button>
+					<button class="btn btn-default save-bgraph" id="">Save</button>
 				</div>
 			</div>
 			<hr/>
 		</div>
 
-		<div id="new_topic_ask_container" style="display:none;">
+		<div id="new-topic-ask-container" class="new-topic-ask-container display-hide">
 			<span><h5>Browsing Graph captures a concept you define.</h5></span>
 			<hr/>
-			<div class="new_topic_container" style="">
-				<div style="margin-bottom:10px;">
-					<input type="text" placeholder="Create a New Topic" style="color:#000; width:275px; height:33px; margin-right:3px;" id="topic_name">
-					<button id="btn_create_now" class="btn btn-primary">Create</button>
-				</div>
+			<div>
+				<input type="text" placeholder="Create a New Topic" id="topic-name">
+				<button id="btn-create-now" class="btn btn-primary">Create</button>
 			</div>
 		</div>
 
-		<div id="currently_pursuing" style="width:300px; color:grey; display:none;">
+		<div id="currently-pursuing" class="currently-pursuing display-hide">
 			<div>
-				<table style="width:100%">
+				<table class="full-width">
 					<tr>
 						<td>
 							<span>Currently researching about:</span>
 						</td>
 					</tr>
 				</table>
-				<h2 class="current_concept_title" id="current_concept_title">Australian Open</h2>
+				<h2 class="current-concept-title" id="current-concept-title"></h2>
 			</div>
 			<hr/>
 			<div>
-				<button class="btn btn-primary" id="view_bgraph">View Graph</button>
-				<button class="btn btn-primary" id="end_bgraph">End Now</button>
+				<button class="btn btn-primary" id="view-bgraph">View Graph</button>
+				<button class="btn btn-primary" id="end-bgraph">End Now</button>
 				
 
-				<span class="dropdown">
-				    <button class="btn btn-primary dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">More
+				<span class="dropdown more-action-dropdown">
+				    <button class="btn btn-primary dropdown-toggle" type="button" id="more-action-menu" data-toggle="dropdown">More
 				    <span class="caret"></span></button>
-				    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="margin:10px; min-width:100px;">
-				      <li role="presentation"><a role="menuitem" tabindex="-1" id="new_bgraph" href="#">New</a></li>
-				      <li role="presentation"><a role="menuitem" class="save_bgraph" tabindex="-1" href="#">Save</a></li>
+				    <ul class="dropdown-menu" role="menu" aria-labelledby="more-action-menu">
+				      <li role="presentation"><a role="menuitem" tabindex="-1" id="new-bgraph" href="#">New</a></li>
+				      <li role="presentation"><a role="menuitem" class="save-bgraph" tabindex="-1" href="#">Save</a></li>
 				    </ul>
 				  </span>
 

@@ -1,5 +1,6 @@
 var bgraph = bgraph || {};
 
+console.log("Event page loaded.");
 
 bgraph.bg_page = {
 
