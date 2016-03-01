@@ -60,6 +60,12 @@ def loginPage():
     return render_template('login.html')
 
 
+@app.route('/logout', methods=['GET'])
+def logout():
+    del session[SESSION_KEY]
+    return redirect(url_for('loginPage'))
+
+
 @app.route('/view/<uid>', methods=['GET'])
 def view(uid):
     data = col_concepts.find_one({'id': uid})
