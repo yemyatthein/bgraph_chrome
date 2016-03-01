@@ -1,5 +1,5 @@
 import json
-import json
+import os
 import base64
 from flask import (Flask, request, make_response, jsonify, 
                    redirect, render_template, url_for, session)
@@ -99,5 +99,11 @@ def all_concepts():
     return render_template('all_concepts.html', data=data)
 
 
+#if __name__ == '__main__':
+#    app.run(debug=True, host='0.0.0.0')
+
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
+
+
