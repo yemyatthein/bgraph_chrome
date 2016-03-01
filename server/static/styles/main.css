@@ -76,5 +76,10 @@ div.fblogin-holder {
     padding-bottom: 30px; 
     border: 1px solid #ccc;
 }
+
+span.fb-login-label {
+    margin-right: 10px;
+}
+
 /* ----------- */
 

@@ -1,2 +1,3 @@
 venv
 server/templates/save_concept.html
+server/auth.data
