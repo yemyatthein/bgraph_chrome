@@ -23,12 +23,18 @@ def isAuthenticated():
     return jsonify({'user_authenticated': _isAuthenticated()})
 
 
+@app.route('/', methods=['GET'])
+def index():
+    if _isAuthenticated():
+        return redirect(url_for('all_concepts'))
+    return redirect(url_for('loginPage') + "?referer=/")
+
+
 @app.route('/fb_login', methods=['POST'])
 def fbLogin():
 
     user_id = json.loads(request.form['user_id'])
     email   = json.loads(request.form['email'])
-    referer = json.loads(request.form['referer'])
 
     session[SESSION_KEY] = str(uuid1())
 
@@ -51,7 +57,7 @@ def save():
 
 @app.route('/login', methods=['GET'])
 def loginPage():
-    return render_template('save_concept.html')
+    return render_template('login.html')
 
 
 @app.route('/view/<uid>', methods=['GET'])

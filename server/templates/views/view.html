@@ -8,6 +8,7 @@
     <link href="{{ url_for('static', filename='styles/main.css') }}" rel="stylesheet" type="text/css"/>
 
 	<script type="text/javascript" src="{{ url_for('static', filename='js/vendors/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/vendors/bootstrap.min.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='js/vendors/vis.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='js/lib.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='js/view_serverside.js') }}"></script>
@@ -37,9 +38,26 @@
                 </div>
                 <div class="col-md-6 full-width">
                     <form class="navbar-form navbar-right search-holder" role="search">
+                        
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Search">
                         </div>
+                        
+                        <span class="dropdown more-action-dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="more-action-menu" data-toggle="dropdown">
+                                <img src="https://goo.gl/gVomoH">
+                            </button>
+                            
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="more-action-menu">
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" id="new-bgraph" href="#">Settings</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" id="new-bgraph" href="#">Log Out</a>
+                                </li>
+                            </ul>
+                      </span>
+
                     </form>
                 </div>
             </div>

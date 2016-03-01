@@ -90,7 +90,9 @@
 
         $.urlParam = function(name){
             var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-            return results[1] || 0;
+            if (results) {
+                return results[1];
+            }
         }
 
         // Here we run a very simple test of the Graph API after login is
@@ -102,22 +104,25 @@
                 //console.log("Successful login for: " + response.name);
                 //document.getElementById("status").innerHTML = "Thanks //for logging in, " + response.name + "!";
 
-                console.log(response.email, response.id, $.urlParam("referer"));
-                
+                console.log(response);
+
                 $.ajax({
                     type: "POST",
                     url: "http://localhost:5000/fb_login",
                     data: {
                         user_id : JSON.stringify(response.id),
-                        email   : JSON.stringify(response.email),
-                        referer : JSON.stringify($.urlParam("referer"))
+                        email   : JSON.stringify(response.email)
                     },
                     success: function(response) {
                         if (response.fb_login_done === true) {
-                            window.close();
-                            //window.location.replace(
-                            //    decodeURIComponent(
-                            //        $.urlParam("referer")));
+                            if ($.urlParam("referer") === undefined) {
+                                window.close();
+                            }
+                            else {
+                                window.location.replace(
+                                    decodeURIComponent(
+                                        $.urlParam("referer")));
+                            }
                         }
                     },
                     dataType: "json"
@@ -153,10 +158,10 @@
 
     <!-- Navigation header bar end -->
     
-    <div style="text-align:left; margin-left:20px; margin-top:40px; color:#585858;">
-        <h5>Browsing Graph captures a concept you define.</h5>
+    <div style="text-align:left; margin-left:50px; margin-top:50px; color:#585858;">
+        <h5>Browsing Graph captures your concepts.</h5>
 
-        <div style="padding:20px; display:inline-block; background:#EFF5FB; margin:10px; margin-left:0px; padding-bottom:30px; border:1px solid #ccc;">
+        <div style="padding:20px; display:inline-block; background:#EFF5FB; margin:10px; margin-left:0px; padding-bottom:30px; width:268.938px; height:79px; border:1px solid #ccc;">
             
             <span style="margin-right:10px;">
                 <strong>Log in With Facebook: </strong>

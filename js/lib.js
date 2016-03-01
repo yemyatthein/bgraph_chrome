@@ -174,8 +174,7 @@ ymt.lib = {
             success: function(response) {
                 if (response.user_authenticated === false) {
                     window.open(
-                        "http://localhost:5000/login?referer=" 
-                        + encodeURIComponent(window.location.href),
+                        "http://localhost:5000/login",
                         "_blank");
                 }
             },
