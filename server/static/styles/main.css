@@ -56,3 +56,25 @@ div.preview-link-container {
     margin-top: 10px;
 }
 /* ------------------ */
+
+
+/* Login page */
+/* ----------- */
+div.login-form-holder {
+    text-align: left; 
+    margin-left: 50px; 
+    margin-top: 50px; 
+    color: #585858;
+}
+
+div.fblogin-holder {
+    padding: 20px; 
+    display: inline-block; 
+    background: #EFF5FB; 
+    margin: 10px; 
+    margin-left: 0px; 
+    padding-bottom: 30px; 
+    border: 1px solid #ccc;
+}
+/* ----------- */
+
