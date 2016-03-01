@@ -99,7 +99,7 @@ def all_concepts():
     return render_template('all_concepts.html', data=data)
 
 
-#if __name__ == '__main__':
-#    app.run(debug=True, host='0.0.0.0')
+if __name__ == '__main__':
+    app.run()#debug=True, host='0.0.0.0')
 
 
