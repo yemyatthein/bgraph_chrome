@@ -32,7 +32,7 @@ ymt.url_summary = {
 
     show: function (url, edge_data, page_info, elem_main_outer, 
                     elem_incoming_outer, elem_outgoing_outer,
-                    elem_no_data_outer) {
+                    elem_no_data_outer, elem_delete_btn) {
         "use strict";
 
         var page = page_info[url];
@@ -49,6 +49,25 @@ ymt.url_summary = {
             
             $(elem_no_data_outer).hide();
             $(elem_main_outer).show();
+
+            $(elem_delete_btn).unbind("click");
+
+            $(elem_delete_btn).click(function(evt) {
+                evt.preventDefault();
+
+                if (confirm("Are you sure want to delete \"" + 
+                            page.page_title + "\"?")) {
+                    
+                    // Send message to event page to delete node
+                    chrome.runtime.sendMessage({
+                        type    : "node_deleted",
+                        node_id : url
+                    }, function(response) {
+                        window.location.reload();
+                    });
+                
+                }
+            });
 
             var incoming_container = $(elem_incoming_outer);
             incoming_container.show();
@@ -121,6 +140,45 @@ ymt.lib = {
         CHROME_NEWTAB: "chrome://newtab/",
     },
 
+    // Get values of first level key of object
+    //
+    getValues : function (obj) {
+        var values = [];
+        Object.keys(obj).forEach(function (key) {
+            values.push(obj[key]);
+        });
+        return values;
+    },
+
+    // Transform an array of nodes to object key being node id
+    // and value being node value.
+    // 
+    nodesToNodesHash : function (nodes, excludes) {
+        var nodes_hash = {};
+
+        nodes.forEach(function(node){
+            if (excludes[node.id] !== undefined) {
+                return;
+            }
+            nodes_hash[node.id] = node;
+        });
+
+        return nodes_hash;
+    },
+
+    // Transform an array of edges to object key being "from+to"
+    // and value being edge value.
+    // 
+    edgesToEdgesHash : function (edges, excludes) {
+        var edges_hash = {};
+
+        edges.forEach(function(edge){
+            edges_hash[edge.from + edge.to] = edge;
+        });
+
+        return edges_hash;
+    },
+
     // Render graph in vis js given graph data. Register event
     // handlers for clicking on nodes as well.
     // 
@@ -149,7 +207,8 @@ ymt.lib = {
                                      $("#url-summary-table"),
                                      $(".main-url-incoming-holder"),
                                      $(".main-url-outgoing-holder"),
-                                     $("#no-summary-info-holder"));
+                                     $("#no-summary-info-holder"),
+                                     $("#main-url-delete-btn"));
             } 
             else {
                 // Clicking on no node, hide summary info
@@ -184,7 +243,8 @@ ymt.lib = {
     
     // Build a browsing graph from data captured by background/event page
     // 
-    buildGraph: function (ds_edge, ds_page_info, ds_stack, ds_origin) {
+    buildGraph: function (ds_edge, ds_page_info, ds_stack, ds_origin, 
+                          ds_deleted) {
         "use strict";
 
         // Initialize result variables
@@ -470,8 +530,8 @@ ymt.lib = {
         }
 
         var return_data = {
-            nodes     : nodes,
-            edges     : edges,
+            nodes     : ymt.lib.nodesToNodesHash(nodes, ds_deleted),
+            edges     : ymt.lib.edgesToEdgesHash(edges, ds_deleted),
             edge_data : edge_data,
         };
 

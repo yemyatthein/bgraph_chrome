@@ -16,7 +16,8 @@ bgraph.bg_page = {
         stack        : {},
         origin       : {},
         page_info    : {},
-        edge         : {}
+        edge         : {},
+        deleted      : {},
     },
 
     refined_data: undefined,
@@ -138,6 +139,11 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)  {
     else if (message.type === "graph_constructed") {
         console.log("DEBUG: Graph is constructed.");
         objref.refined_data = message.data;
+    }
+    else if (message.type === "node_deleted") {
+        console.log("DEBUG: Node delete request received.");
+        objref.data.deleted[message.node_id] = true;
+        sendResponse();
     }
 });
 
